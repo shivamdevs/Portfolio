@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { ArrowDownRight, Cpu } from "lucide-react";
+import { ArrowDownRight } from "lucide-react";
 
-import { CORE_SKILLS, HERO, PERSONAL, SYSTEM_METRICS } from "@/lib/constants";
+import { HERO, PERSONAL, SYSTEM_METRICS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import LoadingSequence from "./LoadingSequence";
 
 const DataScene = dynamic(() => import("@/components/canvas/DataScene"), {
 	ssr: false,
@@ -29,17 +28,12 @@ const accentBorder: Record<string, string> = {
 };
 
 export function HeroSection() {
-	const [sceneLoaded, setSceneLoaded] = useState(false);
-
 	return (
 		<section id="hero" className="relative min-h-screen overflow-hidden">
 			{/* 3D canvas */}
 			<div className="absolute inset-0">
-				<DataScene onReady={() => setSceneLoaded(true)} />
+				<DataScene />
 			</div>
-
-			{/* loading overlay */}
-			<LoadingSequence loaded={sceneLoaded} />
 
 			{/* content layer */}
 			<div className="relative z-30 mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-end px-6 pb-20 pt-28 md:px-10">
@@ -69,13 +63,10 @@ export function HeroSection() {
 					{/* tag strip */}
 					<div className="mt-6 flex flex-wrap gap-2">
 						<span className="rounded border border-emerald-400/35 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-300 font-medium">
-							Founding Engineer
+							Software Engineer
 						</span>
 						<span className="rounded border border-white/12 bg-white/5 px-3 py-1 text-xs text-zinc-300">
-							{PERSONAL.role.replace(
-								"Founding Full Stack Engineer ",
-								"",
-							)}
+							{PERSONAL.role}
 						</span>
 						<span className="rounded border border-white/12 bg-white/5 px-3 py-1 text-xs text-zinc-400 font-mono">
 							{PERSONAL.location}

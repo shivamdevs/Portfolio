@@ -19,9 +19,9 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-	title: "ShivamDevs ‣∙‣",
+	title: "ShivamDevs",
 	description:
-		"Founding Engineer portfolio. Systems, data engines, and high-performance products by Shivam Dewangan.",
+		"Software Engineer. Systems, data engines, and high-performance products.",
 };
 
 export default function RootLayout({

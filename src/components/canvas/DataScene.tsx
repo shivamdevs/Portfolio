@@ -4,10 +4,6 @@ import { useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-type DataSceneProps = {
-	onReady?: () => void;
-};
-
 /* ── deterministic pseudo-random ─────────────────────── */
 const fract = (v: number) => {
 	const x = Math.sin(v * 127.1 + 311.7) * 43758.5453;
@@ -106,7 +102,7 @@ function Nodes({ nodes }: { nodes: Vec3[] }) {
 }
 
 /* ── root scene ──────────────────────────────────────── */
-function Scene({ onReady }: DataSceneProps) {
+function Scene() {
 	const groupRef = useRef<THREE.Group>(null);
 	const mouse = useRef({ x: 0, y: 0 });
 	const { nodes, edges } = useMemo(() => buildGraph(), []);
@@ -117,12 +113,10 @@ function Scene({ onReady }: DataSceneProps) {
 			mouse.current.y = -((e.clientY / window.innerHeight) * 2 - 1);
 		};
 		window.addEventListener("mousemove", onMove);
-		const t = window.setTimeout(() => onReady?.(), 600);
 		return () => {
 			window.removeEventListener("mousemove", onMove);
-			window.clearTimeout(t);
 		};
-	}, [onReady]);
+	}, []);
 
 	useFrame((state) => {
 		const g = groupRef.current;
@@ -151,7 +145,7 @@ function Scene({ onReady }: DataSceneProps) {
 }
 
 /* ── exported component ─────────────────────────────── */
-export default function DataScene({ onReady }: DataSceneProps) {
+export default function DataScene() {
 	return (
 		<Canvas
 			gl={{ antialias: true, alpha: false }}
@@ -182,7 +176,7 @@ export default function DataScene({ onReady }: DataSceneProps) {
 				distance={20}
 				decay={2}
 			/>
-			<Scene onReady={onReady} />
+			<Scene />
 		</Canvas>
 	);
 }

@@ -15,10 +15,10 @@ export default function Home() {
 				className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
 				aria-hidden="true"
 			>
-				<div className="absolute -top-60 -left-60 h-[650px] w-[650px] rounded-full bg-emerald-500/10 blur-[140px]" />
-				<div className="absolute top-1/3 -right-48 h-[500px] w-[500px] rounded-full bg-blue-500/9 blur-[120px]" />
-				<div className="absolute bottom-1/4 left-1/3 h-[400px] w-[400px] rounded-full bg-violet-500/8 blur-[100px]" />
-				<div className="absolute bottom-0 right-1/4 h-[300px] w-[300px] rounded-full bg-amber-500/6 blur-[90px]" />
+				<div className="absolute -top-60 -left-60 h-162.5 w-162.5 rounded-full bg-emerald-500/10 blur-[140px]" />
+				<div className="absolute top-1/3 -right-48 h-125 w-125 rounded-full bg-blue-500/9 blur-[120px]" />
+				<div className="absolute bottom-1/4 left-1/3 h-100 w-100 rounded-full bg-violet-500/8 blur-[100px]" />
+				<div className="absolute bottom-0 right-1/4 h-75 w-75 rounded-full bg-amber-500/6 blur-[90px]" />
 			</div>
 			<Nav />
 			<main className="relative z-10">

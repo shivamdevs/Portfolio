@@ -1,7 +1,7 @@
 export const PERSONAL = {
 	name: "Shivam Dewangan",
 	username: "ShivamDevs",
-	role: "Founding Full Stack Engineer (Lead)",
+	role: "Full Stack Engineer (Lead)",
 	location: "Bangalore, KA",
 	education: "B.Tech CSE · Lovely Professional University · 2024",
 } as const;
