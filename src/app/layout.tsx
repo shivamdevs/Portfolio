@@ -19,7 +19,7 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-	title: "ShivamDevs — The Architect's Console",
+	title: "ShivamDevs ‣∙‣",
 	description:
 		"Founding Engineer portfolio. Systems, data engines, and high-performance products by Shivam Dewangan.",
 };

@@ -6,6 +6,7 @@ import {
 	Wrench,
 	Rocket,
 	Github,
+	Linkedin,
 	Mail,
 	FileText,
 	MapPin,
@@ -53,6 +54,7 @@ const CONTACT_LINKS: {
 	href: string;
 	Icon: LucideIcon;
 	accent: string;
+	download?: string;
 }[] = [
 	{
 		label: "Email",
@@ -69,16 +71,24 @@ const CONTACT_LINKS: {
 		accent: "zinc",
 	},
 	{
+		label: "LinkedIn",
+		sub: "/in/shivamdevs",
+		href: EXTERNAL_LINKS.linkedin,
+		Icon: Linkedin,
+		accent: "blue",
+	},
+	{
 		label: "Resume",
 		sub: "Download PDF",
 		href: EXTERNAL_LINKS.resume,
 		Icon: FileText,
 		accent: "blue",
+		download: "ShivamDevs_Resume.pdf",
 	},
 	{
 		label: "Location",
 		sub: PERSONAL.location,
-		href: "#",
+		href: EXTERNAL_LINKS.location,
 		Icon: MapPin,
 		accent: "amber",
 	},
@@ -115,23 +125,15 @@ export default function ContactPage() {
 				initial={{ opacity: 0, y: 12 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.4, delay: 0.1 }}
-				className="mb-16 grid gap-3 sm:grid-cols-2 lg:grid-cols-4"
+				className="mb-16 grid gap-3 sm:grid-cols-1 lg:grid-cols-5"
 			>
 				{CONTACT_LINKS.map((link) => (
 					<Link
 						key={link.label}
 						href={link.href}
-						target={
-							link.href.startsWith("http") ||
-							link.href.startsWith("mailto")
-								? "_blank"
-								: undefined
-						}
-						rel={
-							link.href.startsWith("http")
-								? "noreferrer"
-								: undefined
-						}
+						target="_blank"
+						rel="noreferrer"
+						download={link.download}
 						className={`group flex items-center gap-3 rounded-xl border border-white/10 bg-white/4 p-4 backdrop-blur-md transition-all duration-200 hover:border-white/20 hover:bg-white/6 ${link.href === "#" ? "pointer-events-none" : ""}`}
 					>
 						<div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white/6 text-zinc-400 transition group-hover:text-zinc-200">
