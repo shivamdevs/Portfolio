@@ -44,7 +44,7 @@ export function TimelineSection() {
 			<div className="mt-10 grid gap-8 lg:grid-cols-[280px_1fr]">
 				{/* timeline rail */}
 				<div className="relative pl-6">
-					<div className="absolute top-0 bottom-0 left-0 w-px bg-linear-to-b from-emerald-500/40 via-blue-500/20 to-transparent" />
+					<div className="absolute top-4 bottom-0 left-0 w-px bg-linear-to-b from-emerald-500/40 via-blue-500/20 to-transparent" />
 
 					{TIMELINE.map((item, index) => {
 						const isActive = index === activeIndex;
@@ -62,7 +62,7 @@ export function TimelineSection() {
 							>
 								{/* node */}
 								<span
-									className={`absolute -left-6 top-1.5 block h-3 w-3 rounded-full border-2 transition-all duration-200 ${
+									className={`absolute -left-7.25 top-1.5 block h-3 w-3 rounded-full border-2 transition-all duration-200 ${
 										isActive
 											? "border-emerald-300 bg-emerald-300 shadow-[0_0_8px_2px_rgb(0_208_132/0.5)]"
 											: isPast

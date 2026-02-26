@@ -31,9 +31,9 @@ export function HeroSection() {
 	return (
 		<section id="hero" className="relative min-h-screen overflow-hidden">
 			{/* 3D canvas */}
-			<div className="absolute inset-0">
+			{/* <div className="absolute inset-0">
 				<DataScene />
-			</div>
+			</div> */}
 
 			{/* content layer */}
 			<div className="relative z-30 mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-end px-6 pb-20 pt-28 md:px-10">

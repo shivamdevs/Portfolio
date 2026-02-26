@@ -86,7 +86,7 @@ export default function JourneyPage() {
 			{/* vertical timeline */}
 			<div className="relative">
 				{/* rail */}
-				<div className="absolute left-3 top-0 bottom-0 w-px bg-linear-to-b from-emerald-500/50 via-violet-500/30 via-amber-500/20 to-blue-500/20" />
+				<div className="absolute left-2 top-8 bottom-0 w-px bg-linear-to-b from-emerald-500/50 via-violet-500/30 via-amber-500/20 to-blue-500/20" />
 
 				<div className="space-y-10 pl-12">
 					{TIMELINE.map((item, index) => {
