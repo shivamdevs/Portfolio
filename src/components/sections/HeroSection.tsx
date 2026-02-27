@@ -113,6 +113,10 @@ export function HeroSection() {
 						</div>
 					))}
 				</motion.div>
+				<p className="mt-3 text-sm leading-relaxed text-transparent max-w-xl">
+					Hi, I&apos;m Shivam Dewangan, also known as shivamdevs
+					across the web.
+				</p>
 			</div>
 		</section>
 	);
