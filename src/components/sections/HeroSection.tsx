@@ -1,17 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { ArrowDownRight } from "lucide-react";
 
 import { HERO, PERSONAL, SYSTEM_METRICS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-
-const DataScene = dynamic(() => import("@/components/canvas/DataScene"), {
-	ssr: false,
-	loading: () => <div className="h-full w-full bg-transparent" />,
-});
 
 const accentText: Record<string, string> = {
 	emerald: "text-emerald-300",

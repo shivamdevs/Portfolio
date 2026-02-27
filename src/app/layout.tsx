@@ -19,9 +19,26 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-	title: "ShivamDevs",
+	title: "shivamdevs | Shivam Dewangan - Full Stack Developer",
 	description:
 		"Software Engineer. Systems, data engines, and high-performance products.",
+	metadataBase: new URL("https://shivamdevs.com"),
+};
+
+const personSchema = {
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: "Shivam Dewangan",
+	url: "https://shivamdevs.com",
+	alternateName: "shivamdevs",
+	sameAs: [
+		"https://github.com/shivamdevs",
+		"https://linkedin.com/in/shivamdevs",
+		"https://www.npmjs.com/~shivamdevs",
+	],
+	jobTitle: "Full Stack Developer",
+	description:
+		"Shivam Dewangan (shivamdevs) is a full-stack developer based in India, working across Python, Node.js, Next.js, TypeScript, AWS, and scalable data systems.",
 };
 
 export default function RootLayout({
@@ -31,6 +48,14 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<head>
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify(personSchema),
+					}}
+				/>
+			</head>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable} bg-background text-foreground antialiased`}
 			>
