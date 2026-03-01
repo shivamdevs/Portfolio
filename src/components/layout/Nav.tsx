@@ -3,14 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import {
-	FileText,
-	Github,
-	Loader2,
-	LogOutIcon,
-	Mail,
-	User2Icon,
-} from "lucide-react";
+import { GithubIcon, Loader2, LogOutIcon, User2Icon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -99,31 +92,15 @@ export function Nav() {
 				</nav>
 
 				<div className="flex items-center gap-2">
-					<a
+					<Link
 						href={EXTERNAL_LINKS.github}
 						target="_blank"
 						rel="noreferrer"
 						title="GitHub"
 						className="hidden md:flex h-8 w-8 items-center justify-center rounded text-zinc-500 transition hover:text-zinc-200"
 					>
-						<Github className="h-4 w-4" />
-					</a>
-					<a
-						href={EXTERNAL_LINKS.contact}
-						title="Email"
-						className="hidden md:flex h-8 w-8 items-center justify-center rounded text-zinc-500 transition hover:text-zinc-200"
-					>
-						<Mail className="h-4 w-4" />
-					</a>
-					<a
-						href={EXTERNAL_LINKS.resume}
-						target="_blank"
-						rel="noreferrer"
-						className="flex items-center gap-1.5 rounded border border-emerald-400/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-300 transition hover:bg-emerald-500/20 hover:border-emerald-400/60"
-					>
-						<FileText className="h-3 w-3" />
-						Resume
-					</a>
+						<GithubIcon className="h-4 w-4" />
+					</Link>
 					<AuthSession
 						authHref={authHref}
 						currentHref={currentHref}
@@ -157,7 +134,7 @@ function AuthSession({
 			<Button
 				variant="outline"
 				size="sm"
-				className="hidden md:inline-flex border-blue-400/30 bg-blue-500/10 text-blue-300 hover:bg-blue-500/20 hover:border-blue-400/60"
+				className="hidden md:inline-flex border-blue-400/30 bg-blue-500/10 text-blue-300 hover:bg-blue-500/20 hover:border-blue-400/60 cursor-pointer"
 				asChild
 			>
 				<Link href={authHref}>Sign in</Link>
@@ -170,7 +147,7 @@ function AuthSession({
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger className="rounded-full border border-blue-400/45 bg-blue-500/12 p-0.5 transition hover:border-blue-300/70">
+			<DropdownMenuTrigger className="rounded-full border border-blue-400/45 bg-blue-500/12 p-0.5 transition hover:border-blue-300/70 cursor-pointer">
 				<Avatar size="sm">
 					<AvatarImage src={user.avatarUrl} alt={user.username} />
 					<AvatarFallback>{displayInitial}</AvatarFallback>
