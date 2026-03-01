@@ -1,3 +1,19 @@
+const env = process.env;
+
+export const IS_PROD = env.NODE_ENV === "production";
+
+export const SITE_BASE_URL = env.NEXT_PUBLIC_SITE_URL ??
+	(IS_PROD ? "https://shivamdevs.com" : "http://localhost:4011");
+
+export const ACCOUNTS_BASE_URL = env.NEXT_PUBLIC_ACCOUNTS_URL ??
+	(IS_PROD ? "https://accounts.shivamdevs.com" : "http://localhost:4010");
+
+export const PB_BASE_URL = env.POCKETBASE_URL ?? env.NEXT_PUBLIC_PB_URL ??
+	"http://localhost:8090";
+
+export const PROFILE_BASE_URL = env.NEXT_PUBLIC_PROFILE_URL ??
+	(IS_PROD ? "https://profile.shivamdevs.com" : "http://localhost:4012");
+
 export const PERSONAL = {
 	name: "Shivam Dewangan",
 	username: "ShivamDevs",
@@ -162,9 +178,25 @@ export const HIRING_MINDSET = [
 
 export const EXTERNAL_LINKS = {
 	github: "https://github.com/ShivamDevs",
-	linkedin: "https://linkedin.com/in/shivamdevs",
-	website: "https://shivamdevs.com",
+	linkedin: "https://www.linkedin.com/in/shivamdevs",
+	website: SITE_BASE_URL,
+	accounts: ACCOUNTS_BASE_URL,
 	resume: "/resume.pdf",
 	contact: "mailto:hi@shivamdevs.com",
 	location: "https://maps.app.goo.gl/hjgQjMUDgmDf2jvi9",
 } as const;
+
+export const AUTH_LINKS = {
+	profile: `${PROFILE_BASE_URL}`,
+	logout(continueUrl: string): string {
+		return `${ACCOUNTS_BASE_URL}/logout?continue=${
+			encodeURIComponent(continueUrl)
+		}`;
+	},
+};
+
+export function buildAccountsAuthUrl(continueUrl: string): string {
+	return `${ACCOUNTS_BASE_URL}/auth?continue=${
+		encodeURIComponent(continueUrl)
+	}`;
+}

@@ -19,9 +19,9 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-	title: "shivamdevs | Shivam Dewangan - Full Stack Developer",
+	title: "Shivam Dewangan · shivamdevs — Full Stack Engineer",
 	description:
-		"Software Engineer. Systems, data engines, and high-performance products.",
+		"Founding Engineer. Systems, data engines, and high-performance products at scale.",
 	metadataBase: new URL("https://shivamdevs.com"),
 };
 
@@ -36,9 +36,9 @@ const personSchema = {
 		"https://linkedin.com/in/shivamdevs",
 		"https://www.npmjs.com/~shivamdevs",
 	],
-	jobTitle: "Full Stack Developer",
+	jobTitle: "Full Stack Engineer",
 	description:
-		"Shivam Dewangan (shivamdevs) is a full-stack developer based in India, working across Python, Node.js, Next.js, TypeScript, AWS, and scalable data systems.",
+		"Shivam Dewangan (shivamdevs) is a full-stack engineer based in Bangalore, India. Founding engineer with experience in Python, Node.js, Next.js, TypeScript, AWS, and scalable data systems handling 10M+ records.",
 };
 
 export default function RootLayout({
@@ -47,7 +47,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" className="dark">
 			<head>
 				<script
 					type="application/ld+json"
