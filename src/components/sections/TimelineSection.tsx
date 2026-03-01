@@ -1,17 +1,37 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, MapPin, ChevronRight } from "lucide-react";
 
-import { TIMELINE } from "@/lib/constants";
+import { COMPANIES } from "@/lib/constants";
+
+const accentMap = {
+	emerald: {
+		border: "grad-border-emerald",
+		bg: "bg-emerald-950/10",
+		tag: "text-emerald-300",
+		tagBg: "border-emerald-400/20 bg-emerald-500/8",
+		dot: "bg-emerald-400",
+		label: "text-emerald-400",
+		badge: "text-emerald-300 border-emerald-400/25 bg-emerald-500/8",
+		cta: "text-emerald-400 border-emerald-400/30 hover:bg-emerald-500/10",
+		shadow: "hover:shadow-[0_4px_32px_-4px_rgb(0,208,132,0.4)]",
+	},
+	blue: {
+		border: "grad-border-blue",
+		bg: "bg-blue-950/10",
+		tag: "text-blue-300",
+		tagBg: "border-blue-400/20 bg-blue-500/8",
+		dot: "bg-blue-400",
+		label: "text-blue-400",
+		badge: "text-blue-300 border-blue-400/25 bg-blue-500/8",
+		cta: "text-blue-400 border-blue-400/30 hover:bg-blue-500/10",
+		shadow: "hover:shadow-[0_4px_32px_-4px_rgb(46,168,255,0.4)]",
+	},
+} as const;
 
 export function TimelineSection() {
-	const [activeIndex, setActiveIndex] = useState(0);
-
-	const active = TIMELINE[activeIndex];
-
 	return (
 		<section
 			id="timeline"
@@ -37,101 +57,97 @@ export function TimelineSection() {
 				<p className="mt-2 max-w-xl text-sm text-zinc-400">
 					From intern at Terribly Tiny Tales to Engineering Lead after
 					acquisition by Collective Artists Network — in under
-					12 months.
+					12&nbsp;months.
 				</p>
 			</motion.div>
 
-			<div className="mt-10 grid gap-8 lg:grid-cols-[280px_1fr]">
-				{/* timeline rail */}
-				<div className="relative pl-6">
-					<div className="absolute top-4 bottom-0 left-0 w-px bg-linear-to-b from-emerald-500/40 via-blue-500/20 to-transparent" />
-
-					{TIMELINE.map((item, index) => {
-						const isActive = index === activeIndex;
-						const isPast = index < activeIndex;
-
-						return (
-							<button
-								key={item.role}
-								type="button"
-								data-active="true"
-								onMouseEnter={() => setActiveIndex(index)}
-								onFocus={() => setActiveIndex(index)}
-								onClick={() => setActiveIndex(index)}
-								className="group relative mb-8 block w-full text-left last:mb-0"
-							>
-								{/* node */}
-								<span
-									className={`absolute -left-7.25 top-1.5 block h-3 w-3 rounded-full border-2 transition-all duration-200 ${
-										isActive
-											? "border-emerald-300 bg-emerald-300 shadow-[0_0_8px_2px_rgb(0_208_132/0.5)]"
-											: isPast
-												? "border-zinc-600 bg-zinc-600"
-												: "border-zinc-700 bg-transparent"
-									}`}
-								/>
-
-								<p
-									className={`text-xs transition-colors ${isActive ? "text-emerald-400" : "text-zinc-600"}`}
-								>
-									{item.period}
-								</p>
-								<p
-									className={`text-sm font-medium mt-0.5 transition-colors ${
-										isActive
-											? "text-zinc-100"
-											: "text-zinc-500 group-hover:text-zinc-300"
-									}`}
-								>
-									{item.role}
-								</p>
-								<p className="text-xs text-zinc-600 mt-0.5">
-									{item.company}
-								</p>
-							</button>
-						);
-					})}
-				</div>
-
-				{/* detail card */}
-				<AnimatePresence mode="wait">
-					{active && (
+			{/* Two company cards */}
+			<div className="mt-10 grid gap-5">
+				{COMPANIES.map((company, index) => {
+					const a = accentMap[company.accent];
+					return (
 						<motion.div
-							key={active.role}
-							initial={{ opacity: 0, x: 12 }}
-							animate={{ opacity: 1, x: 0 }}
-							exit={{ opacity: 0, x: -8 }}
-							transition={{ duration: 0.22 }}
-							className="grad-border-emerald rounded-xl bg-emerald-950/10 p-6 backdrop-blur-md transition-all duration-300 hover:shadow-[0_4px_32px_-4px_rgb(0_208_132/0.2)]"
+							key={company.id}
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true, amount: 0.25 }}
+							transition={{ duration: 0.45, delay: index * 0.12 }}
+							className={`group relative rounded-xl p-6 backdrop-blur-md transition-all duration-300 ${a.border} ${a.bg} ${a.shadow}`}
 						>
-							<p className="text-[11px] tracking-[0.25em] text-emerald-400 uppercase font-medium">
-								Core Achievement
-							</p>
-							<h3 className="mt-3 text-xl font-semibold text-zinc-100">
-								{active.role}
-							</h3>
-							<p className="text-sm text-zinc-400 mt-0.5">
-								{active.company} &middot; {active.period}
-							</p>
-							<p className="mt-4 text-sm leading-relaxed text-zinc-300">
-								{active.achievement}
-							</p>
-							<div className="mt-5 flex flex-wrap gap-2">
-								{active.tags.map((tag) => (
-									<span
-										key={tag}
-										className="rounded border border-emerald-400/20 bg-emerald-500/8 px-2 py-0.5 text-xs text-emerald-300"
+							{/* header */}
+							<div className="flex items-start justify-between gap-3 mb-4">
+								<div>
+									<p
+										className={`font-mono text-[10px] tracking-[0.28em] uppercase ${a.label}`}
 									>
-										{tag}
+										{company.period}
+									</p>
+									<h3 className="mt-1 text-lg font-semibold text-zinc-100 leading-tight">
+										{company.name}
+									</h3>
+									<span className="flex items-center gap-1 mt-0.5 text-xs text-zinc-500">
+										<MapPin className="h-3 w-3" />
+										{company.location}
+									</span>
+								</div>
+								<span
+									className={`shrink-0 rounded border px-2 py-0.5 text-[10px] font-mono font-semibold tracking-widest ${a.badge}`}
+								>
+									{company.shortName}
+								</span>
+							</div>
+
+							{/* summary */}
+							<p className="text-sm leading-relaxed text-zinc-400 mb-5">
+								{company.summary}
+							</p>
+
+							{/* roles list */}
+							<div className="space-y-1.5 mb-5">
+								{company.roles.map((role) => (
+									<div
+										key={role.title}
+										className="flex items-center gap-2"
+									>
+										<span
+											className={`h-1.5 w-1.5 shrink-0 rounded-full ${a.dot}`}
+										/>
+										<span className="text-xs text-zinc-300 font-medium">
+											{role.title}
+										</span>
+										<span className="text-xs text-zinc-600 ml-auto shrink-0">
+											{role.period}
+										</span>
+									</div>
+								))}
+							</div>
+
+							{/* highlights */}
+							<div className="flex flex-wrap gap-2 mb-4">
+								{company.highlights.map((h) => (
+									<span
+										key={h}
+										className={`rounded border px-2 py-0.5 text-[11px] ${a.tagBg} ${a.tag}`}
+									>
+										{h}
 									</span>
 								))}
 							</div>
+
+							{/* detail CTA */}
+							<Link
+								href={`/journey#${company.id}`}
+								className={`inline-flex items-center gap-1.5 rounded border px-3 py-1.5 text-xs font-medium transition-all duration-200 ${a.cta}`}
+							>
+								View details
+								<ChevronRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+							</Link>
 						</motion.div>
-					)}
-				</AnimatePresence>
+					);
+				})}
 			</div>
 
-			{/* view full CTA */}
+			{/* full journey CTA */}
 			<div className="mt-8 flex justify-end">
 				<Link
 					href="/journey"

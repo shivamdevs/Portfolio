@@ -1,66 +1,49 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Calendar, Zap } from "lucide-react";
+import { MapPin, Calendar, Layers, ChevronRight, Zap } from "lucide-react";
 
 import { PageShell } from "@/components/layout/PageShell";
-import { TIMELINE } from "@/lib/constants";
+import { COMPANIES } from "@/lib/constants";
 
-/* ── color per role ───────────────────────────────── */
-const roleAccent: Record<
-	string,
-	{
-		line: string;
-		node: string;
-		nodeShadow: string;
-		border: string;
-		bg: string;
-		tag: string;
-		tagBg: string;
-	}
-> = {
-	"Engineering Lead": {
-		line: "emerald",
-		node: "bg-emerald-300 border-emerald-300",
-		nodeShadow: "shadow-[0_0_10px_2px_rgb(0_208_132/0.55)]",
+/* ── accent config ─────────────────────────────────── */
+const accentMap = {
+	emerald: {
+		line: "from-emerald-500/50 via-emerald-500/20 to-transparent",
+		node: "bg-emerald-300 border-emerald-300 shadow-[0_0_10px_2px_rgb(0_208_132/0.5)]",
 		border: "grad-border-emerald",
-		bg: "bg-emerald-950/15",
+		bg: "bg-emerald-950/12",
 		tag: "text-emerald-300",
 		tagBg: "border-emerald-400/25 bg-emerald-500/8",
+		label: "text-emerald-400",
+		badge: "text-emerald-300 border-emerald-400/30 bg-emerald-500/8",
+		projectBorder: "border-emerald-500/15",
+		projectBg: "bg-emerald-950/8",
+		stackTag: "text-emerald-300 border-emerald-400/20 bg-emerald-500/8",
+		divider: "bg-emerald-500/15",
 	},
-	"Founding Full Stack Engineer": {
-		line: "violet",
-		node: "bg-violet-300 border-violet-300",
-		nodeShadow: "shadow-[0_0_10px_2px_rgb(155_125_255/0.55)]",
-		border: "grad-border-violet",
-		bg: "bg-violet-950/15",
-		tag: "text-violet-300",
-		tagBg: "border-violet-400/25 bg-violet-500/8",
-	},
-	Acquisition: {
-		line: "amber",
-		node: "bg-amber-300 border-amber-300",
-		nodeShadow: "shadow-[0_0_10px_2px_rgb(245_158_11/0.55)]",
-		border: "grad-border-amber",
-		bg: "bg-amber-950/12",
-		tag: "text-amber-300",
-		tagBg: "border-amber-400/25 bg-amber-500/8",
-	},
-	"Software Engineer Intern": {
-		line: "blue",
-		node: "bg-blue-300 border-blue-300",
-		nodeShadow: "shadow-[0_0_10px_2px_rgb(46_168_255/0.55)]",
+	blue: {
+		line: "from-blue-500/50 via-blue-500/20 to-transparent",
+		node: "bg-blue-300 border-blue-300 shadow-[0_0_10px_2px_rgb(46_168_255/0.5)]",
 		border: "grad-border-blue",
-		bg: "bg-blue-950/15",
+		bg: "bg-blue-950/12",
 		tag: "text-blue-300",
 		tagBg: "border-blue-400/25 bg-blue-500/8",
+		label: "text-blue-400",
+		badge: "text-blue-300 border-blue-400/30 bg-blue-500/8",
+		projectBorder: "border-blue-500/15",
+		projectBg: "bg-blue-950/8",
+		stackTag: "text-blue-300 border-blue-400/20 bg-blue-500/8",
+		divider: "bg-blue-500/15",
 	},
-};
+} as const;
+
+type AccentKey = keyof typeof accentMap;
 
 export default function JourneyPage() {
 	return (
 		<PageShell breadcrumb="Journey" accent="blue">
-			{/* header */}
+			{/* page header */}
 			<motion.div
 				initial={{ opacity: 0, y: 16 }}
 				animate={{ opacity: 1, y: 0 }}
@@ -78,84 +61,223 @@ export default function JourneyPage() {
 				</h1>
 				<p className="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
 					From intern at Terribly Tiny Tales to Engineering Lead —
-					through an acquisition — in under 12&nbsp;months. Every step
-					is documented below.
+					through an acquisition — in under 12&nbsp;months. Every
+					company, every role, every project — documented below.
 				</p>
 			</motion.div>
 
-			{/* vertical timeline */}
-			<div className="relative">
-				{/* rail */}
-				<div className="absolute left-2 top-8 bottom-0 w-px bg-linear-to-b from-emerald-500/50 via-violet-500/30 via-amber-500/20 to-blue-500/20" />
-
-				<div className="space-y-10 pl-12">
-					{TIMELINE.map((item, index) => {
-						const a =
-							roleAccent[item.role] ??
-							roleAccent["Software Engineer Intern"]!;
-						return (
-							<motion.div
-								key={item.role}
-								initial={{ opacity: 0, x: -16 }}
-								whileInView={{ opacity: 1, x: 0 }}
-								viewport={{ once: true, amount: 0.25 }}
-								transition={{
-									duration: 0.5,
-									delay: index * 0.1,
-								}}
-								className="relative"
+			{/* company sections */}
+			<div className="space-y-20">
+				{COMPANIES.map((company, ci) => {
+					const a = accentMap[company.accent as AccentKey];
+					return (
+						<motion.section
+							key={company.id}
+							id={company.id}
+							initial={{ opacity: 0, y: 24 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true, amount: 0.1 }}
+							transition={{ duration: 0.5, delay: ci * 0.08 }}
+						>
+							{/* company header card */}
+							<div
+								className={`rounded-xl p-6 backdrop-blur-md ${a.border} ${a.bg} mb-10`}
 							>
-								{/* node dot */}
-								<span
-									className={`absolute -left-12 top-5 block h-4 w-4 rounded-full border-2 ${a.node} ${a.nodeShadow}`}
-								/>
-
-								{/* card */}
-								<div
-									className={`rounded-xl p-6 backdrop-blur-md transition-all duration-300 ${a.border} ${a.bg}`}
-								>
-									{/* meta row */}
-									<div className="flex flex-wrap items-center gap-x-4 gap-y-1 mb-4">
+								<div className="flex flex-wrap items-start justify-between gap-4">
+									<div>
 										<span
-											className={`font-mono text-[10px] tracking-[0.25em] uppercase ${a.tag}`}
+											className={`inline-block rounded border px-2 py-0.5 font-mono text-[10px] tracking-[0.3em] uppercase mb-2 ${a.badge}`}
 										>
-											{item.period}
+											{company.shortName}
 										</span>
-										<span className="flex items-center gap-1 text-xs text-zinc-500">
-											<MapPin className="h-3 w-3" />
-											{item.company}
-										</span>
-										<span className="flex items-center gap-1 text-xs text-zinc-600">
-											<Calendar className="h-3 w-3" />
-											{item.period}
-										</span>
+										<h2 className="font-display text-2xl font-semibold text-zinc-100 md:text-3xl">
+											{company.name}
+										</h2>
+										<div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+											<span className="flex items-center gap-1 text-xs text-zinc-500">
+												<Calendar className="h-3 w-3" />
+												{company.period}
+											</span>
+											<span className="flex items-center gap-1 text-xs text-zinc-500">
+												<MapPin className="h-3 w-3" />
+												{company.location}
+											</span>
+										</div>
 									</div>
-
-									<h2 className="font-display text-xl font-semibold text-zinc-100">
-										{item.role}
-									</h2>
-
-									<p className="mt-3 text-sm leading-relaxed text-zinc-300">
-										{item.achievement}
-									</p>
-
-									{/* tags */}
-									<div className="mt-5 flex flex-wrap gap-2">
-										{item.tags.map((tag) => (
+									{/* highlights */}
+									<div className="flex flex-wrap gap-2">
+										{company.highlights.map((h) => (
 											<span
-												key={tag}
-												className={`flex items-center gap-1 rounded border px-2 py-0.5 text-xs ${a.tagBg} ${a.tag}`}
+												key={h}
+												className={`flex items-center gap-1 rounded border px-2.5 py-1 text-xs font-medium ${a.tagBg} ${a.tag}`}
 											>
 												<Zap className="h-2.5 w-2.5" />
-												{tag}
+												{h}
 											</span>
 										))}
 									</div>
 								</div>
-							</motion.div>
-						);
-					})}
-				</div>
+								<p className="mt-4 text-sm leading-relaxed text-zinc-300 max-w-3xl">
+									{company.summary}
+								</p>
+							</div>
+
+							<div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
+								{/* === roles timeline === */}
+								<div>
+									<div className="flex items-center gap-2 mb-6">
+										<ChevronRight
+											className={`h-4 w-4 ${a.label}`}
+										/>
+										<h3
+											className={`text-[11px] font-medium tracking-[0.25em] uppercase ${a.label}`}
+										>
+											Roles
+										</h3>
+									</div>
+
+									<div className="relative pl-8">
+										{/* rail */}
+										<div
+											className={`absolute left-2 top-2 bottom-0 w-px bg-linear-to-b ${a.line}`}
+										/>
+
+										<div className="space-y-8">
+											{company.roles.map((role, ri) => (
+												<motion.div
+													key={role.title}
+													initial={{
+														opacity: 0,
+														x: -12,
+													}}
+													whileInView={{
+														opacity: 1,
+														x: 0,
+													}}
+													viewport={{
+														once: true,
+														amount: 0.4,
+													}}
+													transition={{
+														duration: 0.4,
+														delay: ri * 0.1,
+													}}
+													className="relative"
+												>
+													{/* node */}
+													<span
+														className={`absolute -left-8 top-1.5 block h-3.5 w-3.5 rounded-full border-2 ${a.node}`}
+													/>
+
+													<p
+														className={`font-mono text-[10px] tracking-[0.25em] uppercase mb-1 ${a.label}`}
+													>
+														{role.period}
+													</p>
+													<h4 className="text-base font-semibold text-zinc-100">
+														{role.title}
+													</h4>
+													<p className="mt-2 text-sm leading-relaxed text-zinc-400">
+														{role.description}
+													</p>
+													<div className="mt-3 flex flex-wrap gap-1.5">
+														{role.tags.map(
+															(tag) => (
+																<span
+																	key={tag}
+																	className={`rounded border px-2 py-0.5 text-[11px] ${a.tagBg} ${a.tag}`}
+																>
+																	{tag}
+																</span>
+															),
+														)}
+													</div>
+												</motion.div>
+											))}
+										</div>
+									</div>
+								</div>
+
+								{/* === projects === */}
+								<div>
+									<div className="flex items-center gap-2 mb-6">
+										<Layers
+											className={`h-4 w-4 ${a.label}`}
+										/>
+										<h3
+											className={`text-[11px] font-medium tracking-[0.25em] uppercase ${a.label}`}
+										>
+											Projects
+										</h3>
+									</div>
+
+									<div className="space-y-4">
+										{company.projects.map((project, pi) => (
+											<motion.div
+												key={project.name}
+												initial={{ opacity: 0, y: 12 }}
+												whileInView={{
+													opacity: 1,
+													y: 0,
+												}}
+												viewport={{
+													once: true,
+													amount: 0.3,
+												}}
+												transition={{
+													duration: 0.4,
+													delay: pi * 0.1,
+												}}
+												className={`rounded-lg border p-5 backdrop-blur-sm transition-all duration-200 ${a.projectBorder} ${a.projectBg}`}
+											>
+												<div className="flex items-start justify-between gap-2 mb-2">
+													<div>
+														<h4 className="text-sm font-semibold text-zinc-100">
+															{project.name}
+														</h4>
+														<p
+															className={`font-mono text-[10px] tracking-[0.2em] mt-0.5 ${a.label}`}
+														>
+															{project.period}
+														</p>
+													</div>
+													<span className="shrink-0 rounded bg-zinc-800/60 px-2 py-0.5 text-[10px] text-zinc-400 font-mono">
+														{project.type}
+													</span>
+												</div>
+
+												<p className="text-xs leading-relaxed text-zinc-400 mb-3">
+													{project.description}
+												</p>
+
+												{/* stack */}
+												<div className="flex flex-wrap gap-1.5 mb-3">
+													{project.stack.map((s) => (
+														<span
+															key={s}
+															className={`rounded border px-2 py-0.5 font-mono text-[10px] ${a.stackTag}`}
+														>
+															{s}
+														</span>
+													))}
+												</div>
+
+												<div
+													className={`h-px w-full mb-3 ${a.divider}`}
+												/>
+												<p
+													className={`text-[11px] font-medium ${a.label}`}
+												>
+													{project.impact}
+												</p>
+											</motion.div>
+										))}
+									</div>
+								</div>
+							</div>
+						</motion.section>
+					);
+				})}
 			</div>
 		</PageShell>
 	);

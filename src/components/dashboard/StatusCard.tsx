@@ -15,7 +15,6 @@ type StatusCardProps = {
 	metricValue: string;
 	detail: string;
 	accent: Accent;
-	icon: string;
 	index?: number;
 };
 
@@ -49,10 +48,6 @@ const titleIconMap: Record<string, LucideIcon> = {
 	Frontend: Monitor,
 };
 
-const sparkPoints =
-	"0,22 22,18 44,20 66,12 88,16 110,9 132,14 154,7 176,11 200,5";
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function StatusCard({
 	title,
 	stack,
@@ -60,10 +55,8 @@ export function StatusCard({
 	metricValue,
 	detail,
 	accent,
-	icon: _icon,
 	index = 0,
 }: StatusCardProps) {
-	const isDataEngine = metricLabel === "Scale";
 	const IconComponent = titleIconMap[title] ?? Server;
 
 	return (
@@ -74,7 +67,7 @@ export function StatusCard({
 			transition={{ duration: 0.5, delay: index * 0.1 }}
 			className="h-full"
 		>
-			<Card accent={accent} className="h-full">
+			<Card accent={accent} className="h-full flex flex-col">
 				<CardHeader>
 					{/* top bar */}
 					<div className="flex items-start justify-between gap-3">
@@ -104,7 +97,7 @@ export function StatusCard({
 					</p>
 				</CardHeader>
 
-				<CardContent className="space-y-4 pt-2">
+				<CardContent className="space-y-4 pt-2 flex flex-col flex-1">
 					{/* big metric */}
 					<p
 						className={cn(
@@ -115,47 +108,8 @@ export function StatusCard({
 						{metricValue}
 					</p>
 
-					{/* sparkline for data engine */}
-					{isDataEngine && (
-						<div className="h-9 rounded border border-white/8 bg-black/30 px-2 py-1">
-							<svg
-								viewBox="0 0 200 28"
-								className="h-full w-full"
-								aria-hidden="true"
-								preserveAspectRatio="none"
-							>
-								<defs>
-									<linearGradient
-										id="spark-grad"
-										x1="0"
-										y1="0"
-										x2="1"
-										y2="0"
-									>
-										<stop
-											offset="0%"
-											stopColor="rgb(155 125 255 / 0.3)"
-										/>
-										<stop
-											offset="100%"
-											stopColor="rgb(155 125 255)"
-										/>
-									</linearGradient>
-								</defs>
-								<polyline
-									points={sparkPoints}
-									fill="none"
-									stroke="url(#spark-grad)"
-									strokeWidth="1.8"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								/>
-							</svg>
-						</div>
-					)}
-
 					{/* stack chips */}
-					<div className="flex flex-wrap gap-1.5">
+					<div className="flex flex-wrap gap-1.5 mt-auto">
 						{stack.map((item) => (
 							<span
 								key={item}
