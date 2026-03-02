@@ -403,14 +403,14 @@ export const HIRING_MINDSET = [
 ] as const;
 
 export const EXTERNAL_LINKS = {
-	github: "https://github.com/ShivamDevs",
-	linkedin: "https://www.linkedin.com/in/shivamdevs",
-	npmjs: "https://www.npmjs.com/~shivamdevs",
+	github: "https://l.shivamdevs.com/q/KcDdACHFN",
+	linkedin: "https://l.shivamdevs.com/q/Pcp8qQJV5",
+	npmjs: "https://l.shivamdevs.com/q/ZosRYZ2VG",
 	website: SITE_BASE_URL,
 	accounts: ACCOUNTS_BASE_URL,
 	resume: "/resume.pdf",
-	contact: "mailto:hi@shivamdevs.com",
-	location: "https://maps.app.goo.gl/hjgQjMUDgmDf2jvi9",
+	contact: "https://l.shivamdevs.com/q/Vm42RHrTN",
+	location: "https://l.shivamdevs.com/q/LfoJ6ELnA",
 } as const;
 
 /**
