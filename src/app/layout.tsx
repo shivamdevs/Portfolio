@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Bricolage_Grotesque } from "next/font/google";
+import Script from "next/script";
+import { UmamiIdentify } from "@/components/analytics/UmamiIdentify";
+import { ANALYTICS_URL, ANALYTICS_ID } from "@/lib/constants";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -56,9 +59,18 @@ export default function RootLayout({
 					}}
 				/>
 			</head>
+			{ANALYTICS_URL && ANALYTICS_ID && (
+				<Script
+					defer
+					src={ANALYTICS_URL}
+					data-website-id={ANALYTICS_ID}
+					strategy="lazyOnload"
+				/>
+			)}
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${bricolage.variable} bg-background text-foreground antialiased`}
 			>
+				<UmamiIdentify />
 				{children}
 			</body>
 		</html>

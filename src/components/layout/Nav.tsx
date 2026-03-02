@@ -97,7 +97,7 @@ export function Nav() {
 						target="_blank"
 						rel="noreferrer"
 						title="GitHub"
-						className="hidden md:flex h-8 w-8 items-center justify-center rounded text-zinc-500 transition hover:text-zinc-200"
+						className="flex h-8 w-8 items-center justify-center rounded text-zinc-500 transition hover:text-zinc-200"
 					>
 						<GithubIcon className="h-4 w-4" />
 					</Link>
@@ -134,7 +134,7 @@ function AuthSession({
 			<Button
 				variant="outline"
 				size="sm"
-				className="hidden md:inline-flex border-blue-400/30 bg-blue-500/10 text-blue-300 hover:bg-blue-500/20 hover:border-blue-400/60 cursor-pointer"
+				className="inline-flex border-blue-400/30 bg-blue-500/10 text-blue-300 hover:bg-blue-500/20 hover:border-blue-400/60 cursor-pointer"
 				asChild
 			>
 				<Link href={authHref}>Sign in</Link>

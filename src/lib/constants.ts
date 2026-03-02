@@ -14,6 +14,12 @@ export const PB_BASE_URL = env.POCKETBASE_URL ?? env.NEXT_PUBLIC_PB_URL ??
 export const PROFILE_BASE_URL = env.NEXT_PUBLIC_PROFILE_URL ??
 	(IS_PROD ? "https://profile.shivamdevs.com" : "http://localhost:4012");
 
+export const ANALYTICS_URL = env.NEXT_PUBLIC_ANALYTICS_URL ??
+	env.ANALYTICS_URL ?? null;
+
+export const ANALYTICS_ID = env.NEXT_PUBLIC_ANALYTICS_ID ??
+	env.ANALYTICS_ID ?? null;
+
 export const PERSONAL = {
 	name: "Shivam Dewangan",
 	username: "ShivamDevs",
@@ -399,11 +405,27 @@ export const HIRING_MINDSET = [
 export const EXTERNAL_LINKS = {
 	github: "https://github.com/ShivamDevs",
 	linkedin: "https://www.linkedin.com/in/shivamdevs",
+	npmjs: "https://www.npmjs.com/~shivamdevs",
 	website: SITE_BASE_URL,
 	accounts: ACCOUNTS_BASE_URL,
 	resume: "/resume.pdf",
 	contact: "mailto:hi@shivamdevs.com",
 	location: "https://maps.app.goo.gl/hjgQjMUDgmDf2jvi9",
+} as const;
+
+/**
+ * Umami event names for every outbound link.
+ * Attach via: data-umami-event={UMAMI_EVENTS.github}
+ * Optionally add data-umami-event-url={EXTERNAL_LINKS.github} for the destination.
+ */
+export const UMAMI_EVENTS = {
+	github: "click:link:github",
+	linkedin: "click:link:linkedin",
+	npmjs: "click:link:npmjs",
+	resume: "click:link:resume",
+	contact: "click:link:contact",
+	location: "click:link:location",
+	accounts: "click:link:accounts",
 } as const;
 
 export const AUTH_LINKS = {
