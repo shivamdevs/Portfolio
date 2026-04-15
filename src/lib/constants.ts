@@ -408,7 +408,7 @@ export const EXTERNAL_LINKS = {
 	npmjs: "https://l.shivamdevs.com/q/ZosRYZ2VG",
 	website: SITE_BASE_URL,
 	accounts: ACCOUNTS_BASE_URL,
-	resume: "/resume.pdf",
+	resume: "/resume/Shivam-Dewangan_2026-04-15.pdf",
 	contact: "https://l.shivamdevs.com/q/Vm42RHrTN",
 	location: "https://l.shivamdevs.com/q/LfoJ6ELnA",
 } as const;
