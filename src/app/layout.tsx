@@ -26,6 +26,29 @@ export const metadata: Metadata = {
 	description:
 		"Founding Engineer. Systems, data engines, and high-performance products at scale.",
 	metadataBase: new URL("https://shivamdevs.com"),
+	openGraph: {
+		type: "website",
+		siteName: "shivamdevs",
+		title: "Shivam Dewangan · shivamdevs — Full Stack Engineer",
+		description:
+			"Founding Engineer. Systems, data engines, and high-performance products at scale.",
+		url: "https://shivamdevs.com",
+		images: [
+			{
+				url: "/og/default.svg",
+				width: 1200,
+				height: 630,
+				alt: "Shivam Dewangan portfolio",
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Shivam Dewangan · shivamdevs — Full Stack Engineer",
+		description:
+			"Founding Engineer. Systems, data engines, and high-performance products at scale.",
+		images: ["/og/default.svg"],
+	},
 };
 
 const personSchema = {

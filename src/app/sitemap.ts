@@ -1,9 +1,19 @@
 import type { MetadataRoute } from "next";
 
+import { listPublishedPosts } from "@/lib/blog/repository";
+import { buildPostPath } from "@/lib/blog/utils";
+
 const siteUrl = "https://shivamdevs.com";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const lastModified = new Date();
+	const publishedPosts = await listPublishedPosts().catch(() => []);
+	const blogRoutes = publishedPosts.map((post) => ({
+		url: `${siteUrl}${buildPostPath(post.author.username, post.slug)}`,
+		lastModified: post.updated ? new Date(post.updated) : lastModified,
+		changeFrequency: "weekly" as const,
+		priority: 0.8,
+	}));
 
 	return [
 		{
@@ -11,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			lastModified,
 			changeFrequency: "weekly",
 			priority: 1,
+		},
+		{
+			url: `${siteUrl}/blogs`,
+			lastModified,
+			changeFrequency: "daily",
+			priority: 0.95,
 		},
 		{
 			url: `${siteUrl}/journey`,
@@ -36,5 +52,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			changeFrequency: "yearly",
 			priority: 0.6,
 		},
+		...blogRoutes,
 	];
 }

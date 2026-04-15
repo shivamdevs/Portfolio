@@ -104,6 +104,13 @@ export function CommandPalette() {
 								<CommandGroup heading="Navigate">
 									<CommandItem
 										onSelect={() =>
+											runAction(() => router.push("/blogs"))
+										}
+									>
+										Blogs
+									</CommandItem>
+									<CommandItem
+										onSelect={() =>
 											runAction(() =>
 												router.push("/dashboard"),
 											)

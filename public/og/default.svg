@@ -1,0 +1,23 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#06101D"/>
+      <stop offset="1" stop-color="#05070D"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(980 120) rotate(145.057) scale(575.398 409.087)">
+      <stop stop-color="#2A95F9" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#2A95F9" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g opacity="0.2">
+    <path d="M-50 560L1240 80" stroke="#60A5FA" stroke-width="2"/>
+    <path d="M120 660L1320 180" stroke="#34D399" stroke-width="2"/>
+    <path d="M-120 470L1080 -10" stroke="#38BDF8" stroke-width="1.5"/>
+  </g>
+  <text x="72" y="220" fill="#93C5FD" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace" font-size="24" letter-spacing="3.5">SHIVAMDEVS</text>
+  <text x="72" y="310" fill="#E5E7EB" font-family="Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="66" font-weight="700">Systems Owner</text>
+  <text x="72" y="382" fill="#CBD5E1" font-family="Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="36">Founding engineer building scalable engines</text>
+  <text x="72" y="454" fill="#94A3B8" font-family="Inter, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="30">10M+ records • platform architecture • execution</text>
+</svg>

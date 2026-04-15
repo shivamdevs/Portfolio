@@ -1,0 +1,402 @@
+[
+	{
+		"id": "pbc_3271004028",
+		"listRule": "post.state = \"published\" || post.author.id = @request.auth.id || @request.auth.role = \"owner\" || @request.auth.role = \"admin\" || @request.auth.role = \"manager\"",
+		"viewRule": "post.state = \"published\" || post.author.id = @request.auth.id || @request.auth.role = \"owner\" || @request.auth.role = \"admin\" || @request.auth.role = \"manager\"",
+		"createRule": "@request.auth.id != \"\" && @request.auth.id = author.id && post.state = \"published\"",
+		"updateRule": "author.id = @request.auth.id || @request.auth.role = \"owner\" || @request.auth.role = \"admin\" || @request.auth.role = \"manager\"",
+		"deleteRule": null,
+		"name": "blog_comments",
+		"type": "base",
+		"fields": [
+			{
+				"autogeneratePattern": "[a-z0-9]{15}",
+				"hidden": false,
+				"id": "text3208210256",
+				"max": 15,
+				"min": 15,
+				"name": "id",
+				"pattern": "^[a-z0-9]+$",
+				"presentable": false,
+				"primaryKey": true,
+				"required": true,
+				"system": true,
+				"type": "text"
+			},
+			{
+				"cascadeDelete": true,
+				"collectionId": "pbc_2248329634",
+				"hidden": false,
+				"id": "relation1519021197",
+				"maxSelect": 1,
+				"minSelect": 0,
+				"name": "post",
+				"presentable": false,
+				"required": true,
+				"system": false,
+				"type": "relation"
+			},
+			{
+				"cascadeDelete": true,
+				"collectionId": "_pb_users_auth_",
+				"hidden": false,
+				"id": "relation3182418120",
+				"maxSelect": 1,
+				"minSelect": 0,
+				"name": "author",
+				"presentable": false,
+				"required": true,
+				"system": false,
+				"type": "relation"
+			},
+			{
+				"autogeneratePattern": "",
+				"hidden": false,
+				"id": "text4274335913",
+				"max": 0,
+				"min": 1,
+				"name": "content",
+				"pattern": "",
+				"presentable": false,
+				"primaryKey": false,
+				"required": true,
+				"system": false,
+				"type": "text"
+			},
+			{
+				"cascadeDelete": false,
+				"collectionId": "pbc_3271004028",
+				"hidden": false,
+				"id": "relation601088749",
+				"maxSelect": 1,
+				"minSelect": 0,
+				"name": "replied",
+				"presentable": false,
+				"required": false,
+				"system": false,
+				"type": "relation"
+			},
+			{
+				"hidden": false,
+				"id": "autodate2990389176",
+				"name": "created",
+				"onCreate": true,
+				"onUpdate": false,
+				"presentable": false,
+				"system": false,
+				"type": "autodate"
+			},
+			{
+				"hidden": false,
+				"id": "autodate3332085495",
+				"name": "updated",
+				"onCreate": true,
+				"onUpdate": true,
+				"presentable": false,
+				"system": false,
+				"type": "autodate"
+			}
+		],
+		"indexes": [
+			"CREATE INDEX `idx_21db4tacZs` ON `blog_comments` (\n  `post`,\n  `created`\n)",
+			"CREATE INDEX `idx_WB77eM1knI` ON `blog_comments` (\n  `author`,\n  `created`\n)",
+			"CREATE INDEX `idx_Bu5PYegOp6` ON `blog_comments` (\n  `post`,\n  `replied`\n)"
+		],
+		"system": false
+	},
+	{
+		"id": "pbc_1200962853",
+		"listRule": "post.state = \"published\"",
+		"viewRule": "post.state = \"published\"",
+		"createRule": "@request.auth.id != \"\" && post.state = \"published\" && user.id = @request.auth.id",
+		"updateRule": "user.id = @request.auth.id",
+		"deleteRule": null,
+		"name": "blog_likes",
+		"type": "base",
+		"fields": [
+			{
+				"autogeneratePattern": "[a-z0-9]{15}",
+				"hidden": false,
+				"id": "text3208210256",
+				"max": 15,
+				"min": 15,
+				"name": "id",
+				"pattern": "^[a-z0-9]+$",
+				"presentable": false,
+				"primaryKey": true,
+				"required": true,
+				"system": true,
+				"type": "text"
+			},
+			{
+				"cascadeDelete": true,
+				"collectionId": "pbc_2248329634",
+				"hidden": false,
+				"id": "relation1519021197",
+				"maxSelect": 1,
+				"minSelect": 0,
+				"name": "post",
+				"presentable": false,
+				"required": false,
+				"system": false,
+				"type": "relation"
+			},
+			{
+				"cascadeDelete": true,
+				"collectionId": "_pb_users_auth_",
+				"hidden": false,
+				"id": "relation2375276105",
+				"maxSelect": 1,
+				"minSelect": 0,
+				"name": "user",
+				"presentable": false,
+				"required": true,
+				"system": false,
+				"type": "relation"
+			},
+			{
+				"hidden": false,
+				"id": "bool1260321794",
+				"name": "active",
+				"presentable": false,
+				"required": false,
+				"system": false,
+				"type": "bool"
+			},
+			{
+				"hidden": false,
+				"id": "autodate2990389176",
+				"name": "created",
+				"onCreate": true,
+				"onUpdate": false,
+				"presentable": false,
+				"system": false,
+				"type": "autodate"
+			},
+			{
+				"hidden": false,
+				"id": "autodate3332085495",
+				"name": "updated",
+				"onCreate": true,
+				"onUpdate": true,
+				"presentable": false,
+				"system": false,
+				"type": "autodate"
+			}
+		],
+		"indexes": [
+			"CREATE UNIQUE INDEX `idx_XZNoNpaaRo` ON `blog_likes` (\n  `post`,\n  `user`\n)",
+			"CREATE INDEX `idx_fzwJMKHF6B` ON `blog_likes` (\n  `post`,\n  `active`\n)"
+		],
+		"system": false
+	},
+	{
+		"id": "pbc_2248329634",
+		"listRule": "state = \"published\" || author.id = @request.auth.id || @request.auth.role = \"owner\" || @request.auth.role = \"admin\" || @request.auth.role = \"manager\"",
+		"viewRule": "state = \"published\" || author.id = @request.auth.id || @request.auth.role = \"owner\" || @request.auth.role = \"admin\" || @request.auth.role = \"manager\"",
+		"createRule": "@request.auth.id != \"\" && author.id = @request.auth.id",
+		"updateRule": "author.id = @request.auth.id || @request.auth.role = \"owner\" || @request.auth.role = \"admin\" || @request.auth.role = \"manager\"",
+		"deleteRule": null,
+		"name": "blog_posts",
+		"type": "base",
+		"fields": [
+			{
+				"autogeneratePattern": "[a-z0-9]{15}",
+				"hidden": false,
+				"id": "text3208210256",
+				"max": 15,
+				"min": 15,
+				"name": "id",
+				"pattern": "^[a-z0-9]+$",
+				"presentable": false,
+				"primaryKey": true,
+				"required": true,
+				"system": true,
+				"type": "text"
+			},
+			{
+				"autogeneratePattern": "",
+				"hidden": false,
+				"id": "text724990059",
+				"max": 180,
+				"min": 3,
+				"name": "title",
+				"pattern": "",
+				"presentable": true,
+				"primaryKey": false,
+				"required": true,
+				"system": false,
+				"type": "text"
+			},
+			{
+				"autogeneratePattern": "",
+				"hidden": false,
+				"id": "text2560465762",
+				"max": 250,
+				"min": 12,
+				"name": "slug",
+				"pattern": "",
+				"presentable": false,
+				"primaryKey": false,
+				"required": true,
+				"system": false,
+				"type": "text"
+			},
+			{
+				"autogeneratePattern": "",
+				"hidden": false,
+				"id": "text1591429585",
+				"max": 320,
+				"min": 12,
+				"name": "excerpt",
+				"pattern": "",
+				"presentable": false,
+				"primaryKey": false,
+				"required": true,
+				"system": false,
+				"type": "text"
+			},
+			{
+				"convertURLs": false,
+				"hidden": false,
+				"id": "editor4274335913",
+				"maxSize": 0,
+				"name": "content",
+				"presentable": false,
+				"required": true,
+				"system": false,
+				"type": "editor"
+			},
+			{
+				"hidden": false,
+				"id": "select2744374011",
+				"maxSelect": 1,
+				"name": "state",
+				"presentable": false,
+				"required": true,
+				"system": false,
+				"type": "select",
+				"values": [
+					"draft",
+					"published"
+				]
+			},
+			{
+				"cascadeDelete": true,
+				"collectionId": "_pb_users_auth_",
+				"hidden": false,
+				"id": "relation3182418120",
+				"maxSelect": 1,
+				"minSelect": 0,
+				"name": "author",
+				"presentable": false,
+				"required": true,
+				"system": false,
+				"type": "relation"
+			},
+			{
+				"hidden": false,
+				"id": "date1748787223",
+				"max": "",
+				"min": "",
+				"name": "published",
+				"presentable": false,
+				"required": false,
+				"system": false,
+				"type": "date"
+			},
+			{
+				"hidden": false,
+				"id": "bool1007901140",
+				"name": "featured",
+				"presentable": false,
+				"required": false,
+				"system": false,
+				"type": "bool"
+			},
+			{
+				"hidden": false,
+				"id": "file2366146245",
+				"maxSelect": 1,
+				"maxSize": 0,
+				"mimeTypes": [
+					"image/png",
+					"image/jpeg",
+					"image/webp",
+					"image/gif"
+				],
+				"name": "cover",
+				"presentable": false,
+				"protected": false,
+				"required": false,
+				"system": false,
+				"thumbs": [],
+				"type": "file"
+			},
+			{
+				"hidden": false,
+				"id": "number190567120",
+				"max": null,
+				"min": null,
+				"name": "readingMinutes",
+				"onlyInt": false,
+				"presentable": false,
+				"required": false,
+				"system": false,
+				"type": "number"
+			},
+			{
+				"cascadeDelete": false,
+				"collectionId": "_pb_users_auth_",
+				"hidden": false,
+				"id": "relation3906892144",
+				"maxSelect": 1,
+				"minSelect": 0,
+				"name": "updatedBy",
+				"presentable": false,
+				"required": false,
+				"system": false,
+				"type": "relation"
+			},
+			{
+				"cascadeDelete": false,
+				"collectionId": "_pb_users_auth_",
+				"hidden": false,
+				"id": "relation1504806204",
+				"maxSelect": 1,
+				"minSelect": 0,
+				"name": "lastModeratedBy",
+				"presentable": false,
+				"required": false,
+				"system": false,
+				"type": "relation"
+			},
+			{
+				"hidden": false,
+				"id": "autodate2990389176",
+				"name": "created",
+				"onCreate": true,
+				"onUpdate": false,
+				"presentable": false,
+				"system": false,
+				"type": "autodate"
+			},
+			{
+				"hidden": false,
+				"id": "autodate3332085495",
+				"name": "updated",
+				"onCreate": true,
+				"onUpdate": true,
+				"presentable": false,
+				"system": false,
+				"type": "autodate"
+			}
+		],
+		"indexes": [
+			"CREATE UNIQUE INDEX `idx_qu8QDRFymS` ON `blog_posts` (\n  `author`,\n  `slug`\n)",
+			"CREATE INDEX `idx_JmYvqgOLwe` ON `blog_posts` (\n  `state`,\n  `published`\n)",
+			"CREATE INDEX `idx_0MehBlnPzW` ON `blog_posts` (\n  `author`,\n  `created`\n)"
+		],
+		"system": false
+	}
+]
