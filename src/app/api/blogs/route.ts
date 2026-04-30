@@ -2,13 +2,9 @@ import { NextResponse } from "next/server";
 import { ClientResponseError } from "pocketbase";
 import * as z from "zod";
 
-import {
-	createBlogPost,
-	ensureUniqueSlugForAuthor,
-	listBlogFeedPosts,
-} from "@/lib/blog/repository";
+import { createBlogPost, listBlogFeedPosts } from "@/lib/blog/repository";
 import { CreateBlogPostSchema } from "@/lib/blog/types";
-import { summarizeContent, toSlug } from "@/lib/blog/utils";
+import { summarizeContent } from "@/lib/blog/utils";
 import { getAuthSession } from "@/lib/session";
 
 export async function GET() {
@@ -49,18 +45,12 @@ export async function POST(request: Request) {
 	}
 
 	try {
-		const slugCandidate = payload.slug ?? toSlug(payload.title);
-		const slug = await ensureUniqueSlugForAuthor(
-			session.record.id,
-			slugCandidate,
-		);
-		const post = await createBlogPost({
-			authorId: session.record.id,
-			title: payload.title,
-			excerpt: payload.excerpt || summarizeContent(payload.content, 180),
-			content: payload.content,
-			state: payload.state,
-			slug,
+const post = await createBlogPost({
+		authorId: session.record.id,
+		title: payload.title,
+		excerpt: payload.excerpt || summarizeContent(payload.content, 180),
+		content: payload.content,
+		state: payload.state,
 			updatedBy: session.record.id,
 		});
 

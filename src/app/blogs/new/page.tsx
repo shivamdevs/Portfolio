@@ -31,8 +31,8 @@ export default async function NewBlogPostPage() {
 	return (
 		<PageShell breadcrumb="New Blog Post" accent="blue">
 			<div className="mb-6 max-w-3xl">
-				<h1 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">Compose Post</h1>
-				<p className="mt-2 text-zinc-400">State is strictly restricted to draft or published.</p>
+				<h1 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">Compose your next post</h1>
+				<p className="mt-2 text-zinc-400">Write in Markdown, save drafts, and publish when ready. The editor previews your content as you write.</p>
 			</div>
 			<div className="max-w-3xl">
 				<PostComposer mode="create" />

@@ -57,7 +57,7 @@ export default async function BlogsPage() {
 					</div>
 				)
 				: (
-					<div className="grid gap-5 md:grid-cols-2">
+					<div className="grid gap-5">
 						{posts.map((post) => (
 							<BlogPostCard key={post.id} post={post} />
 						))}

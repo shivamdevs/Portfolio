@@ -29,8 +29,8 @@ export default async function EditPostPage({
 	return (
 		<PageShell breadcrumb="Edit Blog Post" accent="amber">
 			<div className="mb-6 max-w-3xl">
-				<h1 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">Edit Post</h1>
-				<p className="mt-2 text-zinc-400">You can edit as author or elevated role (owner/admin/manager).</p>
+				<h1 className="text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">Edit post</h1>
+				<p className="mt-2 text-zinc-400">Update title, excerpt, content, and publish state. Drafts stay private until you publish.</p>
 			</div>
 			<div className="max-w-3xl">
 				<PostComposer mode="edit" postId={post.id} initialPost={post} />

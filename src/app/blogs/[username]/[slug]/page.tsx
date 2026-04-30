@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound, permanentRedirect } from "next/navigation";
+import { notFound, permanentRedirect, redirect } from "next/navigation";
+
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 import { CommentSection } from "@/components/blog/CommentSection";
 import { LikeButton } from "@/components/blog/LikeButton";
@@ -40,7 +43,10 @@ export async function generateMetadata({
 	params: Promise<{ username: string; slug: string }>;
 }): Promise<Metadata> {
 	const resolved = await params;
-	const post = await getPostByUsernameAndSlug(resolved.username, resolved.slug);
+	const post = await getPostByUsernameAndSlug(
+		resolved.username,
+		resolved.slug,
+	);
 
 	if (!post || post.state !== "published") {
 		return {
@@ -52,7 +58,9 @@ export async function generateMetadata({
 
 	const canonicalPath = buildPostPath(post.author.username, post.slug);
 	const canonicalUrl = `${SITE_BASE_URL}${canonicalPath}`;
-	const ogImage = `${SITE_BASE_URL}/blogs/${encodeURIComponent(post.author.username)}/${encodeURIComponent(post.slug)}/opengraph-image`;
+	const ogImage = `${SITE_BASE_URL}/blogs/${
+		encodeURIComponent(post.author.username)
+	}/${encodeURIComponent(post.slug)}/opengraph-image`;
 
 	return {
 		title: `${post.title} · @${post.author.username}`,
@@ -96,6 +104,10 @@ export default async function BlogPostPage({
 		notFound();
 	}
 
+	if (post.state === "draft") {
+		redirect(`${buildPostPath(post.author.username, post.slug)}/edit`);
+	}
+
 	const canonicalPath = buildPostPath(post.author.username, post.slug);
 	const requestedPath = buildPostPath(resolved.username, resolved.slug);
 	if (canonicalPath !== requestedPath) {
@@ -116,55 +128,65 @@ export default async function BlogPostPage({
 
 	return (
 		<PageShell breadcrumb="Blogs" accent="blue">
-			<article className="mx-auto w-full max-w-3xl rounded-xl border border-white/12 bg-zinc-950/65 p-6 backdrop-blur md:p-8">
-				{post.state === "draft" ? (
-					<p className="mb-4 inline-flex rounded border border-amber-400/40 bg-amber-500/12 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.15em] text-amber-200">
-						Draft preview
-					</p>
-				) : null}
+			<article className="mx-auto w-full rounded-xl border border-white/12 bg-zinc-950/65 p-6 backdrop-blur md:p-8">
 				<h1 className="text-balance text-3xl font-semibold tracking-tight text-zinc-100 md:text-4xl">
 					{post.title}
 				</h1>
-				<p className="mt-3 text-base leading-relaxed text-zinc-300">{post.excerpt}</p>
+				<p className="mt-3 text-base leading-relaxed text-zinc-300">
+					{post.excerpt}
+				</p>
 				<div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-zinc-500">
 					<span>@{post.author.username}</span>
 					<span>•</span>
-					<span>{new Date(post.published ?? post.updated).toLocaleString()}</span>
+					<span>
+						{new Date(post.published ?? post.updated)
+							.toLocaleString()}
+					</span>
 				</div>
 
-				{canEdit ? (
-					<div className="mt-5">
-						<Link
-							href={`${buildPostPath(post.author.username, post.slug)}/edit`}
-							className="inline-flex rounded border border-amber-400/45 bg-amber-500/12 px-3 py-1.5 text-sm text-amber-100 transition hover:border-amber-300/70 hover:bg-amber-500/24"
-						>
-							Edit post
-						</Link>
-					</div>
-				) : null}
+				{canEdit
+					? (
+						<div className="mt-5">
+							<Link
+								href={`${
+									buildPostPath(
+										post.author.username,
+										post.slug,
+									)
+								}/edit`}
+								className="inline-flex rounded border border-amber-400/45 bg-amber-500/12 px-3 py-1.5 text-sm text-amber-100 transition hover:border-amber-300/70 hover:bg-amber-500/24"
+							>
+								Edit post
+							</Link>
+						</div>
+					)
+					: null}
 
-				<div className="mt-8 space-y-4 text-sm leading-7 text-zinc-200">
-					{post.content.split(/\n\n+/).map((paragraph, index) => (
-						<p key={`${post.id}-${index}`} className="whitespace-pre-wrap">
-							{paragraph}
-						</p>
-					))}
+				<div className="max-w-none mt-8 space-y-6 text-sm leading-7 text-zinc-200">
+					<ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
 				</div>
 
-				{showEngagement ? (
-					<div className="mt-9 flex flex-wrap items-center gap-4 border-t border-white/10 pt-5">
-						<LikeButton
-							postId={post.id}
-							initialCount={likes.count}
-							initialLiked={likes.likedByViewer}
-							authenticated={authenticated}
-						/>
-						<ShareActions url={canonicalUrl} title={post.title} />
-					</div>
-				) : null}
+				{showEngagement
+					? (
+						<div className="mt-9 flex flex-wrap items-center gap-4 border-t border-white/10 pt-5">
+							<LikeButton
+								postId={post.id}
+								initialCount={likes.count}
+								initialLiked={likes.likedByViewer}
+								authenticated={authenticated}
+							/>
+							<ShareActions
+								url={canonicalUrl}
+								title={post.title}
+							/>
+						</div>
+					)
+					: null}
 			</article>
 
-			{showEngagement ? <CommentSection postId={post.id} initialComments={comments} /> : null}
+			{showEngagement
+				? <CommentSection postId={post.id} initialComments={comments} />
+				: null}
 		</PageShell>
 	);
 }

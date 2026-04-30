@@ -42,8 +42,7 @@ export async function POST(request: Request) {
 	}
 
 	try {
-		const pb = getServerPb();
-		pb.authStore.save(session.token, null);
+		const pb = await getServerPb();
 
 		await pb.collection("contacts").create({
 			user: session.record.id,

@@ -3,13 +3,10 @@ import { ClientResponseError } from "pocketbase";
 import * as z from "zod";
 
 import { canEditPost } from "@/lib/auth/roles";
-import {
-	ensureUniqueSlugForAuthor,
-	getPostById,
-	updateBlogPost,
-} from "@/lib/blog/repository";
+import { getPostById, updateBlogPost } from "@/lib/blog/repository";
 import { UpdateBlogPostSchema } from "@/lib/blog/types";
 import { getAuthSession } from "@/lib/session";
+import { toSlug } from "@/lib/blog/utils";
 
 const RouteParamsSchema = z.object({
 	postId: z.string().min(1),
@@ -64,14 +61,10 @@ export async function PATCH(
 			return NextResponse.json({ error: "Forbidden." }, { status: 403 });
 		}
 
-		let slug = payload.slug;
-		if (slug) {
-			const slugSource = slug || toSlug(current.title);
-			slug = await ensureUniqueSlugForAuthor(
-				current.authorId,
-				slugSource,
-				current.id,
-			);
+		let slug: string | undefined;
+		if (payload.slug || payload.title) {
+			const slugSource = payload.slug ?? payload.title ?? current.title;
+			slug = `${current.id}-${toSlug(slugSource) || "post"}`;
 		}
 
 		const post = await updateBlogPost(current.id, {

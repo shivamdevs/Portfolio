@@ -14,6 +14,14 @@ const POSTS_COLLECTION = "blog_posts";
 const COMMENTS_COLLECTION = "blog_comments";
 const LIKES_COLLECTION = "blog_likes";
 
+function buildTemporarySlug(): string {
+	return `tmp-${Math.random().toString(36).slice(2, 10)}`;
+}
+
+function buildCanonicalSlug(postId: string, title: string): string {
+	return `${postId}-${toSlug(title) || "post"}`;
+}
+
 function estimateReadingMinutes(content: string): number {
 	const words = content.trim().split(/\s+/).filter(Boolean).length;
 	return Math.max(1, Math.ceil(words / 220));
@@ -95,7 +103,7 @@ function mapCommentRecord(record: RecordModel): BlogComment {
 export async function listBlogFeedPosts(
 	viewerId?: string,
 ): Promise<BlogPost[]> {
-	const pb = getServerPb();
+	const pb = await getServerPb();
 	const filter = viewerId
 		? pb.filter(`state = {:state} || author = {:authorId}`, {
 			state: "published",
@@ -103,11 +111,14 @@ export async function listBlogFeedPosts(
 		})
 		: pb.filter(`state = {:state}`, { state: "published" });
 
+	console.log("Fetching posts with filter:", filter);
+
 	const records = await pb.collection(POSTS_COLLECTION).getFullList({
 		filter,
 		expand: "author",
 		sort: "-published,-created",
 	});
+
 	return records.map(mapPostRecord);
 }
 
@@ -115,7 +126,7 @@ export async function getPostByUsernameAndSlug(
 	username: string,
 	slug: string,
 ): Promise<BlogPost | null> {
-	const pb = getServerPb();
+	const pb = await getServerPb();
 	const author = await pb.collection("users").getFirstListItem(
 		pb.filter(`username = {:username}`, { username }),
 	).catch(() => null);
@@ -139,7 +150,10 @@ export async function getPostByUsernameAndSlug(
 		expand: "author",
 	}).catch(() => null);
 
-	if (!candidates || candidates.totalItems !== 1 || candidates.items.length !== 1) {
+	if (
+		!candidates || candidates.totalItems !== 1 ||
+		candidates.items.length !== 1
+	) {
 		return null;
 	}
 
@@ -147,7 +161,7 @@ export async function getPostByUsernameAndSlug(
 }
 
 export async function listPublishedPosts(): Promise<BlogPost[]> {
-	const pb = getServerPb();
+	const pb = await getServerPb();
 	const records = await pb.collection(POSTS_COLLECTION).getFullList({
 		filter: pb.filter(`state = {:state}`, { state: "published" }),
 		expand: "author",
@@ -158,7 +172,7 @@ export async function listPublishedPosts(): Promise<BlogPost[]> {
 }
 
 export async function getPostById(postId: string): Promise<BlogPost | null> {
-	const pb = getServerPb();
+	const pb = await getServerPb();
 	const record = await pb.collection(POSTS_COLLECTION).getOne(postId, {
 		expand: "author",
 	}).catch(() => null);
@@ -170,7 +184,7 @@ export async function ensureUniqueSlugForAuthor(
 	candidate: string,
 	excludePostId?: string,
 ): Promise<string> {
-	const pb = getServerPb();
+	const pb = await getServerPb();
 	const base = toSlug(candidate) || "post";
 	let slug = base;
 	let cursor = 2;
@@ -178,11 +192,14 @@ export async function ensureUniqueSlugForAuthor(
 	while (true) {
 		const existing = await pb.collection(POSTS_COLLECTION).getFirstListItem(
 			excludePostId
-				? pb.filter(`author = {:authorId} && slug = {:slug} && id != {:excludeId}`, {
-					authorId,
-					slug,
-					excludeId: excludePostId,
-				})
+				? pb.filter(
+					`author = {:authorId} && slug = {:slug} && id != {:excludeId}`,
+					{
+						authorId,
+						slug,
+						excludeId: excludePostId,
+					},
+				)
 				: pb.filter(`author = {:authorId} && slug = {:slug}`, {
 					authorId,
 					slug,
@@ -201,10 +218,10 @@ export async function createBlogPost(input: {
 	excerpt: string;
 	content: string;
 	state: BlogPostState;
-	slug: string;
+	slug?: string;
 	updatedBy?: string;
 }): Promise<BlogPost> {
-	const pb = getServerPb();
+	const pb = await getServerPb();
 	const published = input.state === "published"
 		? new Date().toISOString()
 		: null;
@@ -215,13 +232,23 @@ export async function createBlogPost(input: {
 			excerpt: input.excerpt,
 			content: input.content,
 			state: input.state,
-			slug: input.slug,
+			slug: input.slug ?? buildTemporarySlug(),
 			published,
 			readingMinutes: estimateReadingMinutes(input.content),
 			updatedBy: input.updatedBy,
 		},
 		{ expand: "author" },
 	);
+
+	const canonicalSlug = buildCanonicalSlug(created.id, input.title);
+	if (canonicalSlug !== String(created.slug)) {
+		const updated = await pb.collection(POSTS_COLLECTION).update(
+			created.id,
+			{ slug: canonicalSlug },
+			{ expand: "author" },
+		);
+		return mapPostRecord(updated);
+	}
 
 	return mapPostRecord(created);
 }
@@ -237,7 +264,7 @@ export async function updateBlogPost(
 		updatedBy: string;
 	}>,
 ): Promise<BlogPost> {
-	const pb = getServerPb();
+	const pb = await getServerPb();
 	const current = await getPostById(postId);
 	if (!current) {
 		throw new Error("Post not found");
@@ -247,6 +274,11 @@ export async function updateBlogPost(
 	const data: Record<string, unknown> = {
 		...input,
 	};
+
+	if (input.title || input.slug) {
+		const slugSource = input.slug ?? input.title ?? current.title;
+		data.slug = buildCanonicalSlug(current.id, slugSource);
+	}
 
 	if (nextState === "published" && !current.published) {
 		data.published = new Date().toISOString();
@@ -267,7 +299,7 @@ export async function updateBlogPost(
 }
 
 export async function listPostComments(postId: string): Promise<BlogComment[]> {
-	const pb = getServerPb();
+	const pb = await getServerPb();
 	const records = await pb.collection(COMMENTS_COLLECTION).getFullList({
 		filter: pb.filter(`post = {:postId}`, { postId }),
 		expand: "author",
@@ -281,7 +313,7 @@ export async function createComment(input: {
 	authorId: string;
 	content: string;
 }): Promise<BlogComment> {
-	const pb = getServerPb();
+	const pb = await getServerPb();
 	const created = await pb.collection(COMMENTS_COLLECTION).create(
 		{
 			post: input.postId,
@@ -297,7 +329,7 @@ export async function getLikeSnapshot(
 	postId: string,
 	viewerId?: string,
 ): Promise<BlogLikeSnapshot> {
-	const pb = getServerPb();
+	const pb = await getServerPb();
 	const [count, likedByViewer] = await Promise.all([
 		pb.collection(LIKES_COLLECTION).getList(1, 1, {
 			filter: pb.filter(`post = {:postId} && active = true`, { postId }),
@@ -322,7 +354,7 @@ export async function toggleLike(input: {
 	postId: string;
 	userId: string;
 }): Promise<BlogLikeSnapshot> {
-	const pb = getServerPb();
+	const pb = await getServerPb();
 	const existing = await pb.collection(LIKES_COLLECTION).getFirstListItem(
 		pb.filter(`post = {:postId} && user = {:userId}`, {
 			postId: input.postId,
