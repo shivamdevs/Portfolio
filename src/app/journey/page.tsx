@@ -61,7 +61,7 @@ export default function JourneyPage() {
 				</h1>
 				<p className="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
 					From intern at Terribly Tiny Tales to Engineering Lead —
-					through an acquisition — in under 12&nbsp;months. Every
+					through an acquisition — over 2.5&nbsp;years. Every
 					company, every role, every project — documented below.
 				</p>
 			</motion.div>

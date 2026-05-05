@@ -226,12 +226,11 @@ export function LabSection() {
 					</p>
 				</div>
 				<h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
-					Projects I Own
+					Projects I&apos;ve Built
 				</h2>
 				<p className="mt-2 max-w-xl text-sm text-zinc-400">
-					Personal systems and tools I&apos;ve built from scratch —
-					infrastructure at scale, developer tooling, and distributed
-					execution environments.
+					Personal systems and tools I&apos;ve built — infrastructure at scale,
+					developer tooling, and browser-based applications.
 				</p>
 			</motion.div>
 

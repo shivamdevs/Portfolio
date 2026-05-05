@@ -13,8 +13,8 @@ export function Footer() {
 						ShivamDevs
 					</p>
 					<p className="font-mono text-xs text-zinc-600 mt-0.5">
-						&copy; {new Date().getFullYear()} \u00b7{" "}
-						{PERSONAL.location} \u00b7 Built with Next.js &amp; Bun
+						&copy; {new Date().getFullYear()} &middot;{" "}
+						{PERSONAL.location} &middot; Built with Next.js &amp; Bun
 					</p>
 				</div>
 				<div className="flex items-center gap-4">

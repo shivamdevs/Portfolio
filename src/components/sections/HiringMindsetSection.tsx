@@ -13,12 +13,12 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import { EXTERNAL_LINKS, HIRING_MINDSET, PERSONAL } from "@/lib/constants";
+import { EXTERNAL_LINKS, ENGINEERING_VALUES, PERSONAL } from "@/lib/constants";
 
-type MindsetItem = (typeof HIRING_MINDSET)[number];
+type ValuesItem = (typeof ENGINEERING_VALUES)[number];
 
 const itemConfig: Record<
-	MindsetItem["title"],
+	ValuesItem["title"],
 	{
 		Icon: LucideIcon;
 		borderClass: string;
@@ -26,7 +26,7 @@ const itemConfig: Record<
 		iconClass: string;
 	}
 > = {
-	"Compounding DNA": {
+	"Team Ownership": {
 		Icon: Dna,
 		borderClass: "grad-border-emerald",
 		bgClass: "bg-linear-to-br from-emerald-950/20 to-black/10",
@@ -38,7 +38,7 @@ const itemConfig: Record<
 		bgClass: "bg-linear-to-br from-violet-950/20 to-black/10",
 		iconClass: "text-violet-400 bg-violet-500/10",
 	},
-	"Zero-to-One Mindset": {
+	"Comfortable with Ambiguity": {
 		Icon: Rocket,
 		borderClass: "grad-border-blue",
 		bgClass: "bg-linear-to-br from-blue-950/20 to-black/10",
@@ -62,19 +62,19 @@ export function HiringMindsetSection() {
 				<div className="flex items-center gap-2 mb-2">
 					<span className="h-px w-6 bg-blue-400/60" />
 					<p className="text-[11px] tracking-[0.25em] text-blue-300 uppercase font-medium">
-						Hiring Mindset
+						Engineering Values
 					</p>
 				</div>
 				<h2 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
-					What I look for in a team.
+					What I value in engineering.
 				</h2>
 				<p className="mt-2 max-w-xl text-sm text-zinc-400">
-					For recruiters and founders — the philosophy behind how I
-					hire and who I want to work with.
+					The principles that guide how I approach problems, build systems,
+					and collaborate with teams.
 				</p>
 			</motion.div>
 			<div className="mt-10 grid gap-4 md:grid-cols-3">
-				{HIRING_MINDSET.map((item, index) => {
+				{ENGINEERING_VALUES.map((item, index) => {
 					const cfg =
 						itemConfig[item.title as keyof typeof itemConfig];
 					if (!cfg) return null;
@@ -118,9 +118,9 @@ export function HiringMindsetSection() {
 					Building something ambitious?
 				</h3>
 				<p className="mt-2 text-sm text-zinc-400 max-w-sm mx-auto">
-					I&apos;m {PERSONAL.name} — {PERSONAL.role}. Open to
-					conversations about staff/lead roles at high-growth
-					startups.
+					I&apos;m {PERSONAL.name} — {PERSONAL.role}. Available for
+					work immediately. Open to conversations about lead
+					engineering roles.
 				</p>
 
 				<div className="mt-6 flex flex-wrap justify-center gap-3">

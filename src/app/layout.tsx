@@ -22,9 +22,9 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-	title: "Shivam Dewangan · shivamdevs — Full Stack Engineer",
+	title: "Shivam Dewangan · shivamdevs — Lead Engineer",
 	description:
-		"Founding Engineer. Systems, data engines, and high-performance products at scale.",
+		"Lead Engineer with experience across infrastructure, data systems, and product development.",
 	metadataBase: new URL("https://shivamdevs.com"),
 };
 
@@ -41,7 +41,7 @@ const personSchema = {
 	],
 	jobTitle: "Full Stack Engineer",
 	description:
-		"Shivam Dewangan (shivamdevs) is a full-stack engineer based in Bangalore, India. Founding engineer with experience in Python, Node.js, Next.js, TypeScript, AWS, and scalable data systems handling 10M+ records.",
+		"Shivam Dewangan (shivamdevs) is a lead engineer based in Bangalore, India. Available for work. Experience with Python, Node.js, Next.js, TypeScript, AWS, and data systems at scale.",
 };
 
 export default function RootLayout({

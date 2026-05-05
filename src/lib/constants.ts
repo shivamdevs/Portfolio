@@ -23,23 +23,23 @@ export const ANALYTICS_ID = env.NEXT_PUBLIC_ANALYTICS_ID ??
 export const PERSONAL = {
 	name: "Shivam Dewangan",
 	username: "ShivamDevs",
-	role: "Full Stack Engineer (Lead)",
+	role: "Lead Engineer",
 	location: "Bangalore, KA",
 	education: "B.Tech CSE · Lovely Professional University · 2024",
 } as const;
 
 export const HERO = {
-	heading: "I build and scale the engines of modern startups.",
+	heading: "I build and maintain systems that power growing startups.",
 	subheading:
-		"Founding Engineer at Collective Artists Network. Fast-tracked from intern to Technical Lead in under 12 months. I own the infrastructure, the data, and the team that ships it.",
-	ctaLabel: "View System Architecture",
+		"Lead Engineer at Collective Artists Network. Grew from intern to engineering lead over 2.5 years, working across infrastructure, data pipelines, and product to ship reliable systems.",
+	ctaLabel: "View Projects",
 } as const;
 
 export const SYSTEM_METRICS = [
-	{ value: "10M+", label: "Records Architected", accent: "emerald" },
-	{ value: "0.5s–2s", label: "API Latency After Opt.", accent: "blue" },
+	{ value: "10M+", label: "Records Managed", accent: "emerald" },
+	{ value: "0.5s–2s", label: "API Response Time", accent: "blue" },
 	{ value: "20+", label: "Technical Interviews", accent: "violet" },
-	{ value: "< 12mo", label: "Intern → Tech Lead", accent: "amber" },
+	{ value: "~2.5yr", label: "Intern → Lead", accent: "amber" },
 ] as const;
 
 export const CORE_SKILLS = [
@@ -62,7 +62,7 @@ export const DASHBOARD_CARDS = [
 		metricLabel: "Uptime",
 		metricValue: "99.9%",
 		detail:
-			"AWS root ownership. VPCs, EKS clusters, self-hosted runners, and FinOps strategy across production.",
+			"Managed AWS infrastructure including VPCs, EKS clusters, self-hosted runners, and cost optimization across production environments.",
 		icon: "⬡",
 	},
 	{
@@ -72,7 +72,7 @@ export const DASHBOARD_CARDS = [
 		metricLabel: "Scale",
 		metricValue: "10M+ rec",
 		detail:
-			"Data lake built on Dagster + AWS Athena. Orchestrated pipelines handling 10M+ records end-to-end.",
+			"Built data pipelines on Dagster + AWS Athena. Orchestrated workflows handling 10M+ records end-to-end.",
 		icon: "◈",
 	},
 	{
@@ -82,26 +82,26 @@ export const DASHBOARD_CARDS = [
 		metricLabel: "Latency",
 		metricValue: "0.5s API",
 		detail:
-			"Shipped consumer apps (Your Forevers, Mini Mindful Moments) and internal tooling with polished UX.",
+			"Shipped consumer apps (Your Forevers, Mini Mindful Moments) and internal tools with polished UX.",
 		icon: "◇",
 	},
 ] as const;
 
 export const TIMELINE = [
 	{
-		role: "Engineering Lead",
+		role: "Lead Engineer",
 		company: "Collective Artists Network",
-		period: "Sept 2024 – Present",
+		period: "Sept 2024 – Apr 2026",
 		achievement:
-			"Scaled from IC to Technical Lead in under 12 months. Hired a pod of 3 engineers via 20+ technical interviews. Entrusted with AWS root access. Standardized Docker/K8s across all projects.",
-		tags: ["Leadership", "Hiring", "AWS Root", "K8s", "FinOps"],
+			"Grew from individual contributor to engineering lead. Hired and onboarded a pod of 3 engineers via 20+ technical interviews. Managed AWS production environments. Standardized Docker/Kubernetes across projects.",
+		tags: ["Leadership", "Hiring", "AWS", "Kubernetes", "FinOps"],
 	},
 	{
 		role: "Founding Full Stack Engineer",
 		company: "Collective Artists Network",
 		period: "Sept 2024",
 		achievement:
-			"Built the post-acquisition technical foundation from zero — VPCs, EKS clusters, CI/CD, and the initial data platform. Managed a data lake of 10M+ records with sub-2s query performance.",
+			"Helped build the post-acquisition technical foundation — VPCs, EKS clusters, CI/CD pipelines, and the initial data platform. Managed a data lake of 10M+ records with sub-2s query performance.",
 		tags: ["EKS", "Dagster", "StarRocks", "Athena", "FastAPI"],
 	},
 	{
@@ -109,7 +109,7 @@ export const TIMELINE = [
 		company: "Collective Artists Network",
 		period: "Aug 2024",
 		achievement:
-			"Retained through the TTT acquisition by Collective Artists Network based on high-impact delivery. Tasked with architecting the new technical foundation for the merged organization.",
+			"Retained through the TTT acquisition by Collective Artists Network based on delivery impact. Helped architect the new technical foundation for the merged organization.",
 		tags: ["Acquisition", "Architecture", "Migration"],
 	},
 	{
@@ -117,7 +117,7 @@ export const TIMELINE = [
 		company: "Terribly Tiny Tales (TTT)",
 		period: "Dec 2023 – Aug 2024",
 		achievement:
-			"Delivered a GenAI video pipeline (Hershey's collab) in 2 months. Managed Academy platform migrations with 99.9% uptime. Shipped Mini Mindful Moments under high-traffic load.",
+			"Delivered a GenAI video pipeline (Hershey's collaboration) in 2 months. Supported Academy platform migrations with 99.9% uptime. Shipped Mini Mindful Moments under high-traffic load.",
 		tags: ["Next.js", "React Native", "OpenAI", "FFmpeg", "AWS Lambda"],
 	},
 ] as const;
@@ -127,11 +127,11 @@ export const COMPANIES = [
 		id: "collective-artists-network",
 		name: "Collective Artists Network",
 		shortName: "CAN",
-		period: "Sept 2024 – Present",
+		period: "Sept 2024 – Apr 2026",
 		location: "Bangalore, India",
 		accent: "emerald" as const,
 		summary:
-			"Transitioned from a retained acquisition engineer to Technical Lead in under 12 months. Built the entire production cloud architecture from scratch — VPCs, EKS clusters, data pipelines, and consumer products — while growing and managing a pod of 3 engineers.",
+			"Grew from a retained acquisition engineer to engineering lead over ~1.5 years. Contributed to building the production cloud architecture — VPCs, EKS clusters, data pipelines, and consumer products — while hiring and managing a pod of 3 engineers.",
 		highlights: [
 			"10M+ records managed",
 			"70% manual overhead cut",
@@ -140,15 +140,15 @@ export const COMPANIES = [
 		],
 		roles: [
 			{
-				title: "Engineering Lead",
-				period: "Sept 2024 – Present",
+				title: "Lead Engineer",
+				period: "Sept 2024 – Apr 2026",
 				description:
-					"Scaled from IC to Technical Lead in under 12 months. Directly responsible for hiring and onboarding the current 3-person engineering pod via 20+ technical interviews. Entrusted with root-level administrative access for all production AWS environments. Standardized Docker and Kubernetes across all new projects for environment parity and horizontal scalability.",
+					"Grew from individual contributor to engineering lead over ~1.5 years. Directly responsible for hiring and onboarding the current 3-person engineering pod via 20+ technical interviews. Managed root-level administrative access for production AWS environments. Standardized Docker and Kubernetes across all new projects for environment parity and horizontal scalability.",
 				tags: [
 					"Leadership",
 					"Hiring",
-					"AWS Root",
-					"K8s",
+					"AWS",
+					"Kubernetes",
 					"FinOps",
 					"Team of 3",
 				],
@@ -157,14 +157,14 @@ export const COMPANIES = [
 				title: "Founding Full Stack Engineer",
 				period: "Sept 2024",
 				description:
-					"Architected the post-acquisition technical foundation from zero — setting up VPCs, EKS clusters, CI/CD pipelines, and the initial data platform. Owned the entire production stack end-to-end.",
+					"Helped build the post-acquisition technical foundation — setting up VPCs, EKS clusters, CI/CD pipelines, and the initial data platform. Worked across the production stack from infrastructure to application code.",
 				tags: ["EKS", "AWS", "CI/CD", "Data Platform", "Zero-to-One"],
 			},
 			{
 				title: "Acquisition — Retained Engineer",
 				period: "Aug 2024",
 				description:
-					"Retained as a core engineer through the TTT acquisition by Collective Artists Network based on high-impact delivery. Tasked with building the new technical foundation for the merged organization.",
+					"Retained as a core engineer through the TTT acquisition by Collective Artists Network based on delivery impact. Helped build the new technical foundation for the merged organization.",
 				tags: ["Architecture", "Migration", "Acquisition"],
 			},
 		],
@@ -174,7 +174,7 @@ export const COMPANIES = [
 				type: "Internal Infrastructure",
 				period: "Mar 2025 – Dec 2025",
 				description:
-					'Architected a next-generation ELT/DLT pipeline to solve the "Fragmented Creator Data" problem. Built on EKS + Dagster for orchestration, StarRocks + Athena for analytics. Managed a data lake of 10M+ records and optimized complex analytical queries from minutes to sub-2s response times.',
+					'Built an ELT/DLT pipeline to address fragmented creator data across multiple APIs and legacy databases. Built on EKS + Dagster for orchestration, StarRocks + Athena for analytics. Managed a data lake of 10M+ records and optimized complex analytical queries from minutes to sub-2s response times.',
 				stack: [
 					"EKS",
 					"Kubernetes",
@@ -209,16 +209,16 @@ export const COMPANIES = [
 				type: "Internal Platform",
 				period: "Sept 2024 – Mar 2025",
 				description:
-					"Designed the internal operating system for talent managers. Successfully migrated legacy talent data into a high-performance React/Django environment, ensuring 100% data integrity during the post-acquisition transition.",
+					"Built the internal platform for talent managers. Migrated legacy talent data into a React/Django environment, maintaining data integrity during the post-acquisition transition.",
 				stack: ["React", "Django", "PostgreSQL", "TypeScript"],
-				impact: "100% data integrity · legacy migration · talent ops",
+				impact: "Data migration · legacy modernization · talent ops",
 			},
 			{
 				name: "Bruised Passports",
 				type: "Mobile & DevOps",
-				period: "Jan 2025 – Present",
+				period: "Jan 2025 – Apr 2026",
 				description:
-					"Led mobile engineering and DevOps for a travel content platform. Built custom Jenkins pipelines for both iOS and Android, automating Dev/Prod environments and revolutionizing the deployment lifecycle.",
+					"Led mobile engineering and DevOps for a travel content platform. Built Jenkins pipelines for both iOS and Android, automating Dev/Prod environments and streamlining the deployment process.",
 				stack: ["React Native", "Strapi", "Jenkins", "iOS", "Android"],
 				impact:
 					"50% release time reduction · CI/CD automation · multi-env",
@@ -233,9 +233,9 @@ export const COMPANIES = [
 		location: "Remote",
 		accent: "blue" as const,
 		summary:
-			"Joined as a Software Engineering Intern at a high-velocity Creative-Tech startup. Delivered zero-to-one product launches and critical platform migrations from day one — directly leading to retention through the Collective Artists Network acquisition.",
+			"Joined as a Software Engineering Intern at a Creative-Tech startup. Contributed to product launches and platform migrations from early on — leading to retention through the Collective Artists Network acquisition.",
 		highlights: [
-			"GenAI pipeline zero-to-one",
+			"GenAI pipeline delivery",
 			"99.9% uptime during peak enrollment",
 			"Retained through acquisition",
 		],
@@ -244,7 +244,7 @@ export const COMPANIES = [
 				title: "Software Engineer Intern",
 				period: "Dec 2023 – Aug 2024",
 				description:
-					"Contributed to four production products across AI, mobile, and web. Delivered a complex Generative AI video pipeline under a 2-month deadline in collaboration with Hershey's. Handled critical payment provider migrations and maintained 99.9% uptime during peak Academy enrollment. Retained by Collective Artists Network through the acquisition based on high-impact delivery.",
+					"Contributed to four production products across AI, mobile, and web. Delivered a Generative AI video pipeline under a 2-month deadline in collaboration with Hershey's. Supported payment provider migrations and maintained 99.9% uptime during peak Academy enrollment. Retained by Collective Artists Network through the acquisition based on delivery impact.",
 				tags: [
 					"Next.js",
 					"React Native",
@@ -261,7 +261,7 @@ export const COMPANIES = [
 				type: "AI Product · Hershey's Collab",
 				period: "2024",
 				description:
-					"Engineered a complex Generative AI pipeline for a high-profile Hershey's collaboration. Transformed text prompts into fully orchestrated videos: Storyboarding → Voice Gen (Suno AI) → Image Gen (OpenAI) → FFmpeg video assembly. Zero-to-one launch delivered under a tight 2-month deadline.",
+					"Built a Generative AI pipeline for a Hershey's collaboration. Transformed text prompts into orchestrated videos: Storyboarding → Voice Gen (Suno AI) → Image Gen (OpenAI) → FFmpeg video assembly. Delivered under a 2-month deadline.",
 				stack: [
 					"Next.js",
 					"Express",
@@ -271,14 +271,14 @@ export const COMPANIES = [
 					"FFmpeg",
 				],
 				impact:
-					"Zero-to-one · GenAI pipeline · 2-month deadline · brand collab",
+					"GenAI pipeline · 2-month deadline · brand collaboration",
 			},
 			{
 				name: "TTT Academy & Academy App",
 				type: "Full Stack & Mobile",
 				period: "Feb 2024 – Sept 2024",
 				description:
-					"Managed the end-to-end Academy portal and mobile app. Handled a critical migration of payment provider integrations and UI overhauls, maintaining 99.9% uptime during peak enrollment periods.",
+					"Supported the Academy portal and mobile app. Handled payment provider migrations and UI updates, maintaining 99.9% uptime during peak enrollment periods.",
 				stack: ["Next.js", "React Native", "Expo", "Express"],
 				impact: "99.9% uptime · payment migration · mobile + web",
 			},
@@ -287,7 +287,7 @@ export const COMPANIES = [
 				type: "Consumer Product · Valentine's Day Collab",
 				period: "2024",
 				description:
-					"Built a high-traffic card generation platform for a Valentine's Day brand collaboration. Scaled to handle thousands of concurrent users creating and sharing digital collaborations in real-time.",
+					"Built a card generation platform for a Valentine's Day brand collaboration. Handled thousands of concurrent users creating and sharing digital content in real-time.",
 				stack: ["Next.js", "Express.js"],
 				impact: "High-traffic · real-time sharing · brand collab",
 			},
@@ -296,10 +296,10 @@ export const COMPANIES = [
 				type: "Internal Tooling",
 				period: "Dec 2023 – Sept 2024",
 				description:
-					'Primary maintainer of the "Control Center" for the TTT team. Consistently iterated on features for user management, content moderation, and daily operations — the backbone the company ran on.',
+					'Maintained the internal "Control Center" for the TTT team. Iterated on features for user management, content moderation, and daily operations.',
 				stack: ["React", "Node.js", "PostgreSQL"],
 				impact:
-					"Daily ops backbone · content moderation · user management",
+					"Daily operations · content moderation · user management",
 			},
 		],
 	},
@@ -310,7 +310,7 @@ export const PROJECTS = [
 		id: "data-platform",
 		name: "Enterprise Data Intelligence Platform",
 		shortLabel: "Data Platform",
-		type: "Internal Infrastructure · SSOT",
+		type: "Internal Infrastructure",
 		accent: "violet" as const,
 		status: "Production-Active",
 		tech: [
@@ -325,14 +325,14 @@ export const PROJECTS = [
 			"Python",
 		],
 		problem:
-			"Fragmented creator data scattered across 5+ social APIs and legacy databases caused 30s+ manual report generation, blocking strategic decisions at scale.",
+			"Creator data scattered across 5+ social APIs and legacy databases caused slow report generation, making it difficult to make strategic decisions at scale.",
 		solution:
-			"High-throughput ELT/DLT pipeline using Dagster orchestration and EKS compute, with a unified OLAP layer (StarRocks + Athena) serving as the Single Source of Truth.",
+			"ELT/DLT pipeline using Dagster orchestration and EKS compute, with a unified OLAP layer (StarRocks + Athena) serving as the central data source.",
 		description:
-			"Architected and owned the core data infrastructure for a creator-economy platform processing records at scale. Designed the full Ingest → Transform → Serve lifecycle — from raw API ingestion to queryable OLAP tables — enabling analysts and product teams to self-serve insights in seconds.",
+			"Built and maintained the core data infrastructure for a creator-economy platform processing records at scale. Designed the full Ingest → Transform → Serve lifecycle — from raw API ingestion to queryable OLAP tables — enabling analysts and product teams to access insights in seconds.",
 		wowFactor: [
 			"10M+ records ingested, normalized, and queryable",
-			"Query time: 30+ minutes → <2 seconds",
+			"Query time reduced from minutes to under 2 seconds",
 			"Fully automated Ingest-Transform-Serve lifecycle",
 		],
 		impact: "10M+ records · minutes → <2s · production",
@@ -381,24 +381,24 @@ export const PROJECTS = [
 	},
 ] as const;
 
-export const HIRING_MINDSET = [
+export const ENGINEERING_VALUES = [
 	{
-		title: "Compounding DNA",
+		title: "Team Ownership",
 		icon: "⬡",
 		body:
-			"The first 5 hires define a startup's trajectory. I look for owners, not coders — people who treat the codebase, the infra, and the product as their own.",
+			"I value teams where everyone takes ownership of the codebase, the infrastructure, and the product. The best engineers I've worked with treat every problem as their own — not just the tasks assigned to them.",
 	},
 	{
 		title: "Pragmatic Architecture",
 		icon: "◈",
 		body:
-			"I choose tools that reduce the distance between idea and production. Dagster for orchestration, Bun for speed. The right abstraction beats the popular one.",
+			"I prefer tools that reduce the distance between idea and production. Dagster for orchestration, Bun for speed. The right abstraction beats the popular one.",
 	},
 	{
-		title: "Zero-to-One Mindset",
+		title: "Comfortable with Ambiguity",
 		icon: "◇",
 		body:
-			"I thrive in ambiguity. I set up the VPC, write the first CI pipeline, and ship the first React component — often in the same week.",
+			"I enjoy working in environments where requirements aren't always clear. I'm comfortable setting up infrastructure, writing CI pipelines, and shipping frontend code — often in the same week.",
 	},
 ] as const;
 

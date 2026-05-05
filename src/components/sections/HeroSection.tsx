@@ -40,7 +40,7 @@ export function HeroSection() {
 					<div className="mb-5 flex items-center gap-3">
 						<span className="h-px w-8 bg-emerald-400/60" />
 						<p className="font-mono text-[10px] tracking-[0.3em] text-emerald-400 uppercase">
-							@ShivamDevs · Systems Owner
+							@ShivamDevs · Lead Engineer
 						</p>
 					</div>
 

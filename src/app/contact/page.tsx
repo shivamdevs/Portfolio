@@ -23,14 +23,14 @@ import { PageShell } from "@/components/layout/PageShell";
 import {
 	buildAccountsAuthUrl,
 	EXTERNAL_LINKS,
-	HIRING_MINDSET,
+	ENGINEERING_VALUES,
 	PERSONAL,
 } from "@/lib/constants";
 
-type MindsetItem = (typeof HIRING_MINDSET)[number];
+type ValuesItem = (typeof ENGINEERING_VALUES)[number];
 
 const itemConfig: Record<
-	MindsetItem["title"],
+	ValuesItem["title"],
 	{
 		Icon: LucideIcon;
 		borderClass: string;
@@ -38,7 +38,7 @@ const itemConfig: Record<
 		iconClass: string;
 	}
 > = {
-	"Compounding DNA": {
+	"Team Ownership": {
 		Icon: Dna,
 		borderClass: "grad-border-emerald",
 		bgClass: "bg-emerald-950/15",
@@ -50,7 +50,7 @@ const itemConfig: Record<
 		bgClass: "bg-violet-950/15",
 		iconClass: "text-violet-400 bg-violet-500/10",
 	},
-	"Zero-to-One Mindset": {
+	"Comfortable with Ambiguity": {
 		Icon: Rocket,
 		borderClass: "grad-border-blue",
 		bgClass: "bg-blue-950/15",
@@ -192,8 +192,8 @@ export default function ContactPage() {
 					Let&apos;s build something together.
 				</h1>
 				<p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-400">
-					I&apos;m open to conversations about senior / lead
-					engineering roles at high-growth startups. If you&apos;re
+					I&apos;m available for work immediately. Open to
+					conversations about lead engineering roles. If you&apos;re
 					building something ambitious — reach out.
 				</p>
 			</motion.div>
@@ -354,16 +354,16 @@ export default function ContactPage() {
 				)}
 			</motion.section>
 
-			{/* hiring mindset */}
+			{/* engineering values */}
 			<div className="mb-14">
 				<h2 className="font-display text-lg font-semibold text-zinc-200 mb-2">
-					Hiring Mindset
+					Engineering Values
 				</h2>
 				<p className="text-sm text-zinc-500 mb-6">
-					What I look for in a team — and what you can expect from me.
+					The principles that guide how I approach problems and collaborate with teams.
 				</p>
 				<div className="grid gap-4 md:grid-cols-3">
-					{HIRING_MINDSET.map((item, index) => {
+					{ENGINEERING_VALUES.map((item, index) => {
 						const cfg =
 							itemConfig[item.title as keyof typeof itemConfig];
 						if (!cfg) return null;
@@ -408,10 +408,10 @@ export default function ContactPage() {
 				<div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
 					<div>
 						<p className="font-mono text-[10px] tracking-[0.25em] text-emerald-400 uppercase mb-2">
-							Open to opportunities
+							Available immediately
 						</p>
 						<h3 className="font-display text-xl font-semibold text-zinc-100">
-							Currently exploring staff/lead roles.
+							Open to lead engineering roles.
 						</h3>
 						<p className="mt-1 text-sm text-zinc-400">
 							Based in {PERSONAL.location}. Remote-friendly.

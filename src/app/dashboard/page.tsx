@@ -97,9 +97,8 @@ export default function DashboardPage() {
 					System Health Dashboard
 				</h1>
 				<p className="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
-					A full breakdown of the infrastructure, data pipelines, and
-					frontend systems I own and operate. Numbers are real —
-					pulled from production context.
+					A breakdown of the infrastructure, data pipelines, and
+					frontend systems I&apos;ve worked with across my career.
 				</p>
 			</motion.div>
 

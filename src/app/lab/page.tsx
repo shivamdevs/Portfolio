@@ -233,13 +233,11 @@ export default function LabPage() {
 					</p>
 				</div>
 				<h1 className="font-display text-3xl font-semibold tracking-tight md:text-4xl">
-					Projects I Own
+					Projects I&apos;ve Built
 				</h1>
 				<p className="mt-3 max-w-2xl text-sm leading-relaxed text-zinc-400">
-					Personal systems and tools built from scratch —
-					infrastructure at scale, Developer Experience (DX) tooling,
-					and Isolated Execution Environments. Every project reflects
-					end-to-end ownership from problem to production.
+					Personal systems and tools I&apos;ve built — infrastructure at scale,
+					Developer Experience (DX) tooling, and browser-based applications.
 				</p>
 			</motion.div>
 
