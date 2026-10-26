@@ -174,7 +174,7 @@ export const COMPANIES = [
 				type: "Internal Infrastructure",
 				period: "Mar 2025 – Dec 2025",
 				description:
-					'Built an ELT/DLT pipeline to address fragmented creator data across multiple APIs and legacy databases. Built on EKS + Dagster for orchestration, StarRocks + Athena for analytics. Managed a data lake of 10M+ records and optimized complex analytical queries from minutes to sub-2s response times.',
+					"Built an ELT/DLT pipeline to address fragmented creator data across multiple APIs and legacy databases. Built on EKS + Dagster for orchestration, StarRocks + Athena for analytics. Managed a data lake of 10M+ records and optimized complex analytical queries from minutes to sub-2s response times.",
 				stack: [
 					"EKS",
 					"Kubernetes",
@@ -408,7 +408,7 @@ export const EXTERNAL_LINKS = {
 	npmjs: "https://l.shivamdevs.com/q/ZosRYZ2VG",
 	website: SITE_BASE_URL,
 	accounts: ACCOUNTS_BASE_URL,
-	resume: "/resume/Shivam-Dewangan_2026-05-04.pdf",
+	resume: "/resume/Shivam-Dewangan_2026-10-26.pdf",
 	contact: "https://l.shivamdevs.com/q/Vm42RHrTN",
 	location: "https://l.shivamdevs.com/q/LfoJ6ELnA",
 } as const;
